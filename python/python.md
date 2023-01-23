@@ -235,6 +235,7 @@ import copy
 list1=[1,2,3,4]
 list2=copy.deepcopy(list1)
 ```
+6. 배열과 반복문을 이용
 
 ## 사전
 
