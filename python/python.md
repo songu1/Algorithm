@@ -205,7 +205,9 @@ num_list.extend(mix_list)   #num_list 뒤에 mix_list를 붙여 확장
 
 ### 리스트 복사
 - 단순 '='으로는 주소값이 복사됨
-1. 슬라이싱
+1. **슬라이싱**
+- 리스트가 다른 오브젝트를 포함할 때 오브젝트는 얕은 복사가 됨
+- 가장 빠름
 ```python
 list1=[1,2,3,4]
 list2=list1[:]
@@ -216,6 +218,7 @@ list1=[1,2,3,4]
 list2=list(list1)
 ```
 3. copy() 메소드
+- 리스트가 다른 오브젝트를 포함할 때 오브젝트는 얕은 복사가 됨
 ```python
 list1=[1,2,3,4]
 list2=list1.copy()
@@ -224,6 +227,13 @@ list2=list1.copy()
 ```python
 list1=[1,2,3,4]
 list2.[]+list1
+```
+5. 깊은 복사
+- 가장 느림
+```python
+import copy
+list1=[1,2,3,4]
+list2=copy.deepcopy(list1)
 ```
 
 ## 사전
