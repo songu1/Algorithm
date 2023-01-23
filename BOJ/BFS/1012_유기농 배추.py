@@ -1,4 +1,4 @@
-# 유기농 배추
+# 유기농 배추 - dfs가 더 알맞음
 # 배추 흰지렁이 인접한 배추로 이동가능 -> 인접한 배추도 보호받을 수 있음
 #
 # 입력: 테스트 케이스 수 T
@@ -8,7 +8,49 @@
 
 # 출력 : 각 테스트 케이스에 대해 필요한 최소의 배추흰지렁이 마리수
 
+import sys
+from collections import deque
 
+result=[]
+
+dx=[-1,1,0,0]
+dy=[0,0,-1,1]
+
+def bfs(graph,y,x):
+    queue=deque()
+    queue.append((y,x))
+    if graph[y][x]==0:
+        return False
+    graph[y][x]=0
+    while queue:
+        y,x=queue.popleft()
+        for i in range(4):
+            nx=x+dx[i]
+            ny=y+dy[i]
+            if nx<0 or ny<0 or nx>=m or ny>=n:
+                continue
+            if graph[ny][nx]==1:
+                graph[ny][nx]=0
+                queue.append((ny,nx))
+
+    return True
+
+t=int(sys.stdin.readline())
+for _ in range(t):
+    m,n,k=map(int,sys.stdin.readline().split())
+    graph=[[0]*m for _ in range(n)]
+    for _ in range(k):
+        x,y=map(int,sys.stdin.readline().split())
+        graph[y][x]=1
+    # bfs
+    res=0
+    for i in range(n):      # y
+        for j in range(m):  # x
+            if bfs(graph,i,j)==True:
+                res+=1
+    result.append(res)
+
+print(*result,sep='\n')
 
 
 # 2
