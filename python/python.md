@@ -203,6 +203,29 @@ num_list.extend(mix_list)   #num_list 뒤에 mix_list를 붙여 확장
 														#[5,4,3,2,1,"조세호", 20, True]
 ```
 
+### 리스트 복사
+- 단순 '='으로는 주소값이 복사됨
+1. 슬라이싱
+```python
+list1=[1,2,3,4]
+list2=list1[:]
+```
+2. list()함수
+```python
+list1=[1,2,3,4]
+list2=list(list1)
+```
+3. copy() 메소드
+```python
+list1=[1,2,3,4]
+list2=list1.copy()
+```
+4. 리스트 연산
+```python
+list1=[1,2,3,4]
+list2.[]+list1
+```
+
 ## 사전
 
 - { 키 : value }

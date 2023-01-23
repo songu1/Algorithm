@@ -11,16 +11,22 @@
 # 출력 : 적록색약이 아닌 경우 구역의 수 / 적록색약인 사람 구역의 수
 
 import sys
+import copy
 
 # 입력
 n=int(sys.stdin.readline())
+
 picX=[]
 picO=[]
 for i in range(n):
     picX.append(list(map(str,sys.stdin.readline().rstrip())))
-    # picO.append(picX[i])
-    picO.append(picX[i].replace('G','R'))
-print(picO)
+    picO=copy.deepcopy(picX)
+    for j in range(n):
+        if picO[i][j]=='G':
+            picO[i][j]='R'
+    
+print('picX:',picX)
+print('picO:',picO)
 
 resX=0
 resO=0
@@ -46,8 +52,7 @@ for i in range(n):
             resX+=1
         if dfs(picO,i,j,picO[i][j])==True:
             resO+=1
-print(picX)
-print(picO)
+
 print(resX,resO)
 
 # 5
