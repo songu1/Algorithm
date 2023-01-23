@@ -11,22 +11,20 @@
 # 출력 : 적록색약이 아닌 경우 구역의 수 / 적록색약인 사람 구역의 수
 
 import sys
-import copy
-
+sys.setrecursionlimit(10000)
 # 입력
 n=int(sys.stdin.readline())
 
 picX=[]
-picO=[]
+picO=[[] for _ in range(n)]
 for i in range(n):
     picX.append(list(map(str,sys.stdin.readline().rstrip())))
-    picO=copy.deepcopy(picX)
     for j in range(n):
-        if picO[i][j]=='G':
-            picO[i][j]='R'
+        if picX[i][j]=='G':
+            picO[i].append('R')
+        else:
+            picO[i].append(picX[i][j])
     
-print('picX:',picX)
-print('picO:',picO)
 
 resX=0
 resO=0
@@ -46,6 +44,7 @@ def dfs(pic,x,y,color):
         return True
     return False
 
+# main 코드
 for i in range(n):
     for j in range(n):
         if dfs(picX,i,j,picX[i][j])==True:
