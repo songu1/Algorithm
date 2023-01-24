@@ -22,6 +22,12 @@ print(a)
     result=[i for i in a if i not in remove_set]
     print(result)
     ```
+- 2차원 리스트 최대, 최소값
+```python
+box=[[1,2,3],[2,3,4],[3,4,5]]
+result=max(map(max,box))
+result2=min(map(min,box))
+```
     
 
 ### (3) 튜플
