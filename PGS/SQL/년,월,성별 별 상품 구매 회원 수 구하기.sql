@@ -7,3 +7,6 @@ FROM USER_INFO U, ONLINE_SALE O
 WHERE U.USER_ID=O.USER_ID AND GENDER IS NOT NULL
 GROUP BY EXTRACT(YEAR FROM SALES_DATE),EXTRACT(MONTH FROM SALES_DATE), GENDER
 ORDER BY YEAR, MONTH, GENDER
+
+-- distinct 해주는 이유
+-- (year, month, gender, user_id)로 쿼리를 쭉 뽑아냈을 때 동일한 row가 나오지 않는다는 보장이 없기 때문
