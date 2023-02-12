@@ -199,6 +199,26 @@ print(ord('A'))     # 문자 -> 아스키
 print(chr(38))      # 아스키 -> 문자
 ```
 
+### (3) 문자열에서 알파벳인 경우 뽑기
+- isalpha() 사용하기!!
+- 공백이 있거나 숫자와 혼용되면 False를 출력
+```python
+Ex1 = 'A'
+print(Ex1.isalpha())    # True
+
+Ex2 = 'ABC'
+print(Ex2.isalpha())    # True
+  
+Ex3 = "앱피아"
+print(Ex3.isalpha())    # True
+  
+Ex4 = "Hello Appia"
+print(Ex4.isalpha())    # False
+  
+Ex5 = "100Appia"
+print(Ex5.isalpha())    # False
+```
+
 # 7. 배열
 
 ### (1) 배열 초기화
