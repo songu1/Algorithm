@@ -10,9 +10,6 @@
 
 import sys
 
-row=[]
-col=[0,'a','b','c','d','e','f','g','h']
-
 c,r=map(str,sys.stdin.readline().rstrip())
 
 r=int(r)
