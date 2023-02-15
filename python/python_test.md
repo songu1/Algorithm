@@ -322,21 +322,21 @@ except IndexError:
 
 
 # 파이썬 문자열 비교
-## 완전 일치
+### 완전 일치
 - ==, !=
 ```python
 print('abc'=='abc')
 print('abc'!='xyz')
 ```
 
-## 부분 일치
+### 부분 일치
 - in, not in
 ```python
 'bbb' in 'aaa-bbb-ccc'
 'xxx' not in 'aaa-bbb-ccc'
 ```
 
-## 전방 일치
+### 전방 일치
 - startswith()
 ```python
 str.'aaa-bbb-ccc'
@@ -349,7 +349,7 @@ print(str.startswith(('xxx', 'yyy', 'zzz')))
 # False
 ```
 
-## 후방 일치
+### 후방 일치
 - endswith()
 ```python
 str = 'aaa-bbb-ccc'
@@ -400,3 +400,34 @@ printList = list(combinations_with_replacement(dataset, 2))
 print(printList)
 # [('A', 'A'), ('A', 'B'), ('A', 'C'), ('B', 'B'), ('B', 'C'), ('C', 'C')]
 ```
+
+# 튜플
+
+## 1. 리스트안의 튜플 정렬
+### (1) n번째 원소로 오름차순 정렬
+- sort(key=lambda x:x[n])
+```python
+# 첫번째 원소로 오름차순 정렬
+v=[(3,4),(2,2),(3,3),(1,2),(1,-1)]
+
+v.sort(key=lambda x:x[0])
+print(v)    # [(1,2),(1,-1),(2,2),(3,4),(3,3)]
+```
+
+### (2) n번째 원소로 내림차순 정렬
+- sort(key=lambda x:-x[n])
+- sort(key=lambda x:x[n],reverse=True)
+```python
+# 첫번째 원소로 내림차순 정렬
+v=[(3,4),(2,2),(3,3),(1,2),(1,-1)]
+
+v.sort(key=lambda x:-x[0])
+v.sort(key=lambda x:x[0],reverse=True)
+print(v)    # [(3,4),(3,3),(2,2),(1,2),(1,-1)]
+```
+
+### (3) 첫번재 원소로 오름차순/내림차순, 두번째 원소로 오름차순
+- 첫번째 원소 오름차순
+    - sort(key=lambda x:(x[0],x[1]))
+- 첫번째 원소 내림차순
+    - sort(key=lambda x:(-x[0],x[1]))
