@@ -219,6 +219,13 @@ Ex5 = "100Appia"
 print(Ex5.isalpha())    # False
 ```
 
+### (4) 숫자로 이루어진 문자열 빈자리 0으로 채우기
+- zfill(자릿수)
+```python
+a="3"
+print(a.zfill(3))       # 003
+```
+
 # 7. 배열
 
 ### (1) 배열 초기화
