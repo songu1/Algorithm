@@ -8,14 +8,15 @@
 
 import sys
 n=int(sys.stdin.readline())
+student=[]
 for i in range(n):
     a,b=list(map(str,sys.stdin.readline().split()))
     b=int(b)
-print(a)
-print(b, type(b))
+    student.append([a,b])
 
-
-
+student.sort(key=lambda x:x[1])
+for st in student:
+    print(st[0],end=' ')
 
 
 
