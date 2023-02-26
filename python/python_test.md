@@ -401,9 +401,9 @@ print(printList)
 # [('A', 'A'), ('A', 'B'), ('A', 'C'), ('B', 'B'), ('B', 'C'), ('C', 'C')]
 ```
 
-# 리스트 내 튜플, 2차원 리스트 정렬
+# 리스트 내 튜플, 리스트 및 사전 정렬
 
-## 1. 리스트안의 튜플 정렬
+## 1. 리스트안의 튜플, 2차원리스트 정렬
 ### (1) n번째 원소로 오름차순 정렬
 - sort(key=lambda x:x[n])
 ```python
@@ -436,3 +436,36 @@ print(v)    # [(3,4),(3,3),(2,2),(1,2),(1,-1)]
     - sort(key=lambda x:(x[0],x[1]))
 - 첫번째 원소 내림차순
     - sort(key=lambda x:(-x[0],x[1]))
+
+## 2. 사전 정렬
+- sorted()를 이용하여 정렬
+### (1) Key를 기준으로 오름차순 정렬
+- sorted의 인자로 dict.items()를 전달하면 오름차순으로 정렬
+```python
+my_dict = {'c': 3, 'a': 1, 'b': 2, 'e': 1, 'd': 2}
+sorted_dict=sorted(my_dict.items())
+```
+
+### (2) Key를 기준으로 내림차순 정렬
+- sorted()에 reverse=True를 인자로 전달
+- lambda가 인자로 전달됨
+```python
+my_dict = {'c': 3, 'a': 1, 'b': 2, 'e': 1, 'd': 2}
+sorted_dict=sorted(my_dict.items(), key=lambda item:item[0], reverse=True)
+sorted_dict2=sorted(my_dict.items(), key=lambda item:-item[0])
+```
+
+### (3) Value를 기준으로 오름차순 정렬
+- sorted()를 사용하여 Value를 기준으로 정렬
+- lambda가 전달, item[1]은 dict의 value
+```python
+my_dict = {'c': 3, 'a': 1, 'b': 2, 'e': 1, 'd': 2}
+sorted_dict = sorted(my_dict.items(), key=lambda item:item[1])
+```
+
+### (3) Value를 기준으로 내림차순 정렬
+- sorted()에 인자로 reverse=True 전달
+```python
+my_dict = {'c': 3, 'a': 1, 'b': 2, 'e': 1, 'd': 2}
+sorted_dict=sorted(my_dict.items(), key=lambda item:item[1], reverse=True)
+sorted_dict2=sorted(my_dict.items(), key=lambda item:-item[1])
