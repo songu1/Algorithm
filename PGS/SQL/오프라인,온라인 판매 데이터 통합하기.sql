@@ -1,0 +1,33 @@
+-- 오프라인, 온라인 판매 데이터 통합하기
+-- 프로그래머스 LV4
+
+-- ONLINE_SALE
+-- ONLINE_SALE_ID(온라인상품판매ID) USER_ID(회원ID) PRODUCT_ID(상품ID) SALES_AMOUNT(판매량) SALES_DATE(판매일)
+    -- 동일 날짜, 회원ID, 상품ID 조합에 대해서는 하나의 판매데이터만 존재
+-- OFFLINE_SALE
+-- OFFLINE_SALE_ID(오프라인상품판매ID) PRODUCT_ID(상품ID) SALES_AMOUNT(판매량) SALES_DATE(판매일)
+    -- 동일 날짜, 상품ID 조합에 대해서는 하나의 판매 데이터만 존재
+    -- OFFLINE_SALE의 판매데이터 USER_ID값은 NULL
+
+-- ONLINE_SALE 테이블과 OFFLINE_SALE 테이블에서 
+-- 2022년 3월의 오프라인/온라인 상품 판매 데이터의 판매 날짜, 상품ID, 유저ID, 판매량을 출력
+-- OFFLINE_SALE 테이블의 판매 데이터의 USER_ID 값은 NULL 로 표시
+-- 판매일을 기준으로 오름차순 정렬, 상품 ID를 기준으로 오름차순, 상품ID까지 같다면 유저 ID를 기준으로 오름차순 정렬
+    
+
+(SELECT TO_CHAR(SALES_DATE,'YYYY-MM-DD') AS SALES_DATE, PRODUCT_ID, USER_ID, SALES_AMOUNT
+FROM ONLINE_SALE
+WHERE EXTRACT(YEAR FROM SALES_DATE)=2022 AND EXTRACT(MONTH FROM SALES_DATE)=3
+)
+UNION ALL
+(SELECT TO_CHAR(SALES_DATE,'YYYY-MM-DD') AS SALES_DATE, PRODUCT_ID, NULL AS USER_ID, SALES_AMOUNT
+ FROM OFFLINE_SALE
+ WHERE EXTRACT(YEAR FROM SALES_DATE)=2022 AND EXTRACT(MONTH FROM SALES_DATE)=3
+)
+ORDER BY SALES_DATE, PRODUCT_ID, USER_ID;
+
+
+-- 2가지 테이블을 단순히 합침
+-- OFFLINE_SALE 테이블의 USER_ID는 NULL로 추가
+-- UNION ALL : 전부 다 UNION
+-- UNION ALL 한 뒤 ORDER BY 가능
