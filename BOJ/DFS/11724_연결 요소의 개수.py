@@ -1,7 +1,7 @@
 # 연결 요소의 개수
 # 방향없는 그래프가 주어졌을 때, 연결 요소의 개수를 구하는 프로그램
 
-# 입력 : 정점의 개수 n, 간선의 개수 m
+# 입력 : 정점의 개수 n, 간선의 개수 m (1~1000, 0~n(n-1)/2)
 # m개의 줄에 간선 양 끝점 u,v가 주어짐 (같은 간선은 1번씩)
 
 # 출력: 연결요소의 개수(덩어리 수)
@@ -24,26 +24,21 @@ for i in range(m):
 def dfs(graph,v,visited):
     # 방문 처리
     visited[v]=True
-    # 현재노드와 연결된 노드가 없을 때
-    if graph[v]==[]:
-        return True
     # 현재노드와 연결된 다른 노드를 재귀적으로 방문
     for i in graph[v]:
         if not visited[i]:
             dfs(graph,i,visited)
-            return True
-    return False
 
 # main 코드
-print(visited)
 res=0
 for i in range(1,n+1):
     if not visited[i]:
-        if dfs(graph,i,visited)==True:
-            res+=1
+        dfs(graph,i,visited)
+        res+=1
 
 print(res)
 
+# 3 0     # 3
 
 # 6 5
 # 1 2
