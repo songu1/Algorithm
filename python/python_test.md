@@ -494,7 +494,7 @@ list2=list1.copy()
 ### (4) 리스트 연산
 ```python
 list1=[1,2,3,4]
-list2.[]+list1
+list2=[]+list1
 ```
 ### (5) 깊은 복사
 - 가장 느림
