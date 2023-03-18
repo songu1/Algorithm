@@ -469,3 +469,38 @@ sorted_dict = sorted(my_dict.items(), key=lambda item:item[1])
 my_dict = {'c': 3, 'a': 1, 'b': 2, 'e': 1, 'd': 2}
 sorted_dict=sorted(my_dict.items(), key=lambda item:item[1], reverse=True)
 sorted_dict2=sorted(my_dict.items(), key=lambda item:-item[1])
+```
+
+# 리스트 복사
+- 단순 '='으로는 주소값이 복사됨
+### (1) 슬라이싱
+- 리스트가 다른 오브젝트를 포함할 때 오브젝트는 얕은 복사가 됨
+- 가장 빠름
+```python
+list1=[1,2,3,4]
+list2=list1[:]
+```
+### (2) list()함수
+```python
+list1=[1,2,3,4]
+list2=list(list1)
+```
+### (3) copy() 메소드
+- 리스트가 다른 오브젝트를 포함할 때 오브젝트는 얕은 복사가 됨
+```python
+list1=[1,2,3,4]
+list2=list1.copy()
+```
+### (4) 리스트 연산
+```python
+list1=[1,2,3,4]
+list2.[]+list1
+```
+### (5) 깊은 복사
+- 가장 느림
+```python
+import copy
+list1=[1,2,3,4]
+list2=copy.deepcopy(list1)
+```
+### (6) 배열과 반복문을 이용
