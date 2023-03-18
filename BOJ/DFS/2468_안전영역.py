@@ -40,8 +40,9 @@ for h in range(hmin-1,hmax+1):
     res=0
     for i in range(n):
         for j in range(n):
-            if dfs(graph,i,j,h)==True:
-                res+=1
+            if not visited[i][j]:
+                if dfs(graph,i,j,h)==True:
+                    res+=1
     result.append(res)
     visited=[[False]*n for _ in range(n)]
 
