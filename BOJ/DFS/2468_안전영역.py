@@ -1,14 +1,14 @@
-# 안전영역
+# 안전영역 - BFS 사용해야지 시간 줄일 수 있음
 # 물에 잠기지 않는 안전한 영역이 최대 몇개?
 # 일정 높이 이하의 모든 지점은 물에 잠김
 
-# 입력 : 지역의 열과 행의 개수 n
-# 지역별 높이정보를 지도로 줌
+# 입력 : 지역의 열과 행의 개수 n(2~100)
+# 지역별 높이정보를 지도로 줌 (1~100)
 
 # 장마철에 물에 잠기지 않는 안전한 영역의 최대 개수
 
 import sys
-sys.setrecursionlimit(10000)
+sys.setrecursionlimit(100000)
 
 # 입력
 n=int(sys.stdin.readline())
@@ -36,7 +36,7 @@ hmax=max(map(max,graph))
 hmin=min(map(min,graph))
 result=[]
 
-for h in range(hmin,hmax):
+for h in range(hmin-1,hmax+1):
     res=0
     for i in range(n):
         for j in range(n):
@@ -81,3 +81,7 @@ print(max(result))
 # 1 2 1 2 1 2 1
 # 2 1 2 1 2 1 2
 # 2 2 1 2 1 2 2       # 20
+
+# 2
+# 1 1
+# 1 1                 # 1
