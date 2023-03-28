@@ -22,7 +22,7 @@ print(a)
     result=[i for i in a if i not in remove_set]
     print(result)
     ```
-- 2차원 리스트 최대, 최소값
+- 2차원 리스트 최대, 최소값 : 최대값, 최소값이 제대로 안나오는 경우가 있음 -> 비추
 ```python
 box=[[1,2,3],[2,3,4],[3,4,5]]
 result=max(map(max,box))
