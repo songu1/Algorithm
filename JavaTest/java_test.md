@@ -34,7 +34,8 @@ public class Main(){
 }
 ```
 ## [2] List
-
+- set -> List 변경
+- 
 
 ## [3] Array
 
