@@ -542,3 +542,64 @@ def func():
     a=3
     return a
 ```
+
+# zip
+## 1. zip
+### (1) 기본 문법
+- 여러개의 순회 가능한 객체를 인자로 받고 각 객체가 담고있는 원소를 튜플의 형태로 차례로 접근할 수 있는 반복자를 반환
+```python
+numbers=[1,2,3]
+letters=["A","B","C"]
+for pair in zip(numbers,letters):
+    print(pair)
+# (1, 'A')
+# (2, 'B')
+# (3, 'C')
+```
+- zip 처리한 것 출력 시
+```python
+numbers=[1,2,3]
+letters=["A","B","C"]
+zip_list=zip(numbers,letters)
+print(list(zip_list))
+```
+### (2) 병렬처리
+- 가변인자를 받으므로 2개 이상의 인자를 넘겨서 병렬처리 가능
+```python
+for number, upper, lower in zip("12345","ABCDE","abcde"):
+    print(number,upper,lower)
+# 1 A a
+# 2 B b
+# 3 C c
+# 4 D d
+# 5 E e
+```
+### (3) 사전변환
+- dict()함수에 키와 값으로 이루어진 튜플을 넘기면 사전이 생성됨
+```python
+keys = [1, 2, 3]
+values = ["A", "B", "C"]
+dict(zip(keys,values))
+# {1: 'A', 2: 'B', 3: 'C'}
+dict(zip(["year", "month", "date"], [2001, 1, 31]))
+# {'year': 2001, 'month': 1, 'date': 31}
+```
+### (4) 주의사항
+- zip()함수로 넘기는 인자의 길이가 다를 때는 주의
+- 가장 짧은 인자를 기준으로 데이터가 엮이고 나머지는 버려짐
+## 2. upzip
+### (1) 기본문법
+- 엮어놓은 데이터를 다시 해체
+```python
+# zip
+numbers = (1, 2, 3)
+letters = ("A", "B", "C")
+pairs = list(zip(numbers, letters))
+print(pairs)
+# [(1, 'A'), (2, 'B'), (3, 'C')]
+
+# unzip
+numbers,letters = zip(*pairs)
+# numbers : (1,2,3)
+# letters : ('A','B','C')
+```
