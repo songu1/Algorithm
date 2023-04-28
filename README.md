@@ -25,3 +25,8 @@ git commit -m "트리 순회 / 실버1 / 30분" -m "https://www.acmicpc.net/prob
 4. **LT** : [리트코드](https://leetcode.com/problemset/all/)
 5. **SEA** : [삼성SW Expert Academy](https://swexpertacademy.com/main/code/problem/problemList.do)
 6. **그외** : 각자 알아볼 수 있게 이름 지정(자유)
+
+### 주요 알고리즘
+- **브루트포스(완전탐색), DFS/BFS, 구현, DP**
+- 그리디, 이분탐색, 투포인터
+- **IT기업** : 우선순위큐, 해시맵, tree알고리즘, 유니온 파인드, 크루스칼 알고리즘, 트리의 지름
