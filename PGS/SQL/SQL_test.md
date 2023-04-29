@@ -35,7 +35,8 @@ TO_DATE('2023-02-03','YYYY-MM-DD')
 ### (1) CASE WHEN
 ```sql
 CASE WHEN 조건 THEN 실행
-ELSE 실행
+WHEN 조건2 THEN 실행2
+ELSE 실행3
 END
 
 -- EX
