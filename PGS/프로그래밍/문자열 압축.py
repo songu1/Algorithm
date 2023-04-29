@@ -69,7 +69,6 @@ print(solution(s))
 
 
 
-
 # "aabbaccc"                    # 7 (aabbacc : 1)
 # "ababcdcdababcdcd"            # 9 (2ababcdcd : 8)
 # "abcabcdede"                  # 8 (2abcdede : 3)
