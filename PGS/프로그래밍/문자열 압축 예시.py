@@ -1,4 +1,3 @@
-
 def compress(text, tok_len):
     words = [text[i:i+tok_len] for i in range(0, len(text), tok_len)]
     res = []
