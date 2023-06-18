@@ -15,69 +15,57 @@ import sys
 graph=[]
 for _ in range(19):
     graph.append(list(map(int,sys.stdin.readline().split())))
-# 시작 위치
-a=-1
-b=-1
+
 
 dx=[1,1,0,-1]   # 반시계방향
 dy=[0,1,1,1]
-def search(graph,x,y,color,dir,count):
-    global a,b
-    # 현재 위치 방문처리
-    graph[x][y] = (-1) * color
-    count += 1
-    # print("graph[",x,"][",y,"] : ",count)
-    # 주변 탐색
-    i=dir   # 현재 방향부터
-    for _ in range(4):
-        if i>3:
-            i -= 4
-        nx=x+dx[i]
-        ny=y+dy[i]
+# 같은 방향으로만 탐색하는 함수(매번 주위 탐색해서 값이 있다면 다시 양수로 바꾸기)
+def search(graph,x,y,color,dir):
+    # count
+    count = 1
+    # 이전 방향에 같은 값이 있을 때
+    nx = x - dx[dir]
+    ny = y - dy[dir]
+    if nx>=0 and nx<19 and ny>=0 and ny<19 and graph[nx][ny] == color:
+        return 0
+    # 이전 방향에 같은 값 없을 때
+    while True:
+        nx = x + dx[dir]
+        ny = y + dy[dir]
         if nx<0 or nx>=19 or ny<0 or ny>=19:
-            i += 1
+            return count
+        if graph[nx][ny] == color:
+            count += 1
+            x = nx
+            y = ny
             continue
-        # 다음 위치가 같은 색
-        if graph[nx][ny] == color or graph[nx][ny] == color*(-1):
-            # 같은 방향일 때
-            if i == dir:
-                count = search(graph,nx,ny,color,dir,count)
-            # 다른 방향일 때
-            else:
-                if count == 5:
-                    return count
-                count = 1
-                a=x
-                b=y
-                count = search(graph,nx,ny,color,i,count)
-            # 반환한 count가 5일 때
-            if count == 5:
-                return count
-        # 다음 위치
-        i += 1
-    return count
+        return count
 
 # main 코드
-count=-1
+count = -1
 for j in range(19):
     for i in range(19):
         if graph[i][j] == 1 or graph[i][j] == 2:
-            a=i
-            b=j
-            count = search(graph,i,j,graph[i][j],0,0)
-            # print("graph[",a,"][",b,"] => ",count)
-            if count == 5:
-                print(graph[a][b]*-1)
-                print(a+1, b+1)
-                break
-    if count == 5:
-        break
+            # 처음 방향 찾기(가능한 모든 방향으로 이동)
+            for k in range(4):
+                ni=i+dx[k]
+                nj=j+dy[k]
+                if ni<0 or ni>=19 or nj<0 or nj>=19:
+                    continue
+                if graph[ni][nj] == abs(graph[i][j]):
+                    count = search(graph,i,j,graph[i][j],k)   # graph,x,y,color,dir
+                if count == 5:
+                    print(abs(graph[i][j]))
+                    print(i+1,j+1)
+                    break
+            if count == 5: break
+    if count == 5: break
 
 if count != 5:
     print(0)
 
-for i in range(19):
-    print(graph[i])
+# for i in range(19):
+#     print(graph[i])
 
 
 # 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
