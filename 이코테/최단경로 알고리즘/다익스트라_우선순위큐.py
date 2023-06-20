@@ -31,7 +31,7 @@ def dijkstra(start):
 			continue
 		# 현재 노드와 연결된 다른 인접한 노드들을 확인
 		for i in graph[now]:
-			const = dist + i[1]
+			cost = dist + i[1]
 			# 현재 노드를 거처서, 다른 노드로 이동하는 거리가 더 짧은 경우
 			if cost < distance[i[0]]:
 				distance[i[0]] = cost
