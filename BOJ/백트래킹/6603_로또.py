@@ -10,6 +10,7 @@
 # 출력 : 각 테스트 케이스 마다 수를 고르는 모든 방법(사전순)
     # 각 테스트 케이스 사이에는 빈줄
 
+# 조합 방법 - 더 빠름! 하지만 백트래킹 연습을 위해 2번 풀이 학습하기
 import sys
 from itertools import *
 
@@ -26,6 +27,24 @@ while True:
             print(lotto[i][j], end=" ")
         print()
     print()    
+
+print([] + [1])
+print([1] + [2])
+
+# dfs를 활용한 백트래킹
+def dfs(graph,v,visited):
+    # 방문처리
+    visited[v] = True
+
+s=[]
+while True:
+    s=list(map(int,sys.stdin.readline().split()))
+    if s[0] == 0:
+        break
+    k = s[0]
+    del s[0]
+    visited = [False]*k
+
 
 
 # 7 1 2 3 4 5 6 7
