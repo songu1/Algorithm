@@ -11,30 +11,36 @@
     # 각 테스트 케이스 사이에는 빈줄
 
 # 조합 방법 - 더 빠름! 하지만 백트래킹 연습을 위해 2번 풀이 학습하기
+
 import sys
-from itertools import *
 
-s=[]
-while True:
-    s=list(map(int,sys.stdin.readline().split()))
-    if s[0] == 0:
-        break
-    k = s[0]
-    del s[0]
-    lotto = list(combinations(s,6))
-    for i in range(len(lotto)):
-        for j in range(6):
-            print(lotto[i][j], end=" ")
-        print()
-    print()    
+# 순열 라이브러리 사용
+# from itertools import *
 
-print([] + [1])
-print([1] + [2])
+# s=[]
+# while True:
+#     s=list(map(int,sys.stdin.readline().split()))
+#     if s[0] == 0:
+#         break
+#     k = s[0]
+#     del s[0]
+#     lotto = list(combinations(s,6))
+#     for i in range(len(lotto)):
+#         for j in range(6):
+#             print(lotto[i][j], end=" ")
+#         print()
+#     print()    
 
 # dfs를 활용한 백트래킹
-def dfs(graph,v,visited):
-    # 방문처리
-    visited[v] = True
+def backtracking(idx, arr):
+    if len(arr) == 6:
+        for i in range(6):
+            print(arr[i],end=" ")
+        print()
+        return
+    
+    for i in range(idx, len(s)):
+        backtracking(i+1, arr + [s[i]])
 
 s=[]
 while True:
@@ -43,7 +49,8 @@ while True:
         break
     k = s[0]
     del s[0]
-    visited = [False]*k
+    backtracking(0,[])
+    print()
 
 
 
