@@ -14,7 +14,7 @@
 # dfs인데 방향을 두 방향으로만..?
 
 # 1차시도 : 11%에서 틀림
-# 2차시도(힌트 봄) : 
+# 2차시도(힌트 봄) : 3%에서 틀림
     # 1. S가 4개 이상인 조합뽑기
     # 2. 뽑은 조합이 연달아 있는지 확인() - BFS
     # 3. 백트래킹
@@ -22,63 +22,58 @@
 
 import sys
 seat=[]
-graph=[]
 for i in range(5):
-    seat.append(list(map(str,sys.stdin.readline().rstrip())))
-    for j in range(5):
-        graph.append(seat[i][j])
-print(graph)
-visited=[[False]*5 for _ in range(5)]
+    seat = seat + list(map(str,sys.stdin.readline().rstrip()))
+visited=[False]*25
 resList=[]
 case = 0
+count = 0
 
 # 조합으로 7개의 수 뽑기
-idxList=[]
+idxList = []
 def combinations(idx,arr,arrIdx):
     if arr.count("Y") >= 4:
         return
     if len(arr) == 7:
-        if arr.count("S")>=4:
-            idxList.append(arrIdx)
+        idxList.append(arrIdx)
+        # if arr.count("S")>=4:
+        #     idxList.append(arrIdx)
         return
     for i in range(idx,25):
-        combinations(i+1, arr + [graph[i]], arrIdx + [i])
+        combinations(i+1, arr + [seat[i]], arrIdx + [i])
 
-for i in range(25):
-    combinations(0,[],[])
-print(idxList)
-print(len(idxList))
-    
+combinations(0,[],[])
 
-# dx=[-1,1,0,0]
-# dy=[0,0,-1,1]
-# def backtracking(arr,x,y,pre):
-#     global case
-#     if arr.count("Y") >= 4:
-#         return
-#     if len(arr) == 7:
-#         res = pre[:]
-#         res.sort()
-#         if res not in resList:
-#             case += 1
-#             resList.append(res)
-#             print(res)
-#             # print(arr)
-#             print(resList)
-#             print()
-#         return
-#     for i in range(4):
-#         nx = x + dx[i]
-#         ny = y + dy[i]
-#         if nx<0 or ny<0 or nx>=5 or ny>=5:
-#             continue
-#         if not visited[nx][ny]:
-#             visited[nx][ny] = True
-#             pre.append((nx,ny))
-#             backtracking(arr + [seat[nx][ny]],nx, ny,pre)
-#             visited[nx][ny] = False
-#             pre.pop()
+# dfs 함수
+dx=[-5,5,-1,1]
+def dfs(arr,x,visited):
+    global count
+    # 방문처리
+    visited[x] = True
+    count += 1
+    if count == 7:
+        return True
+    # 주변 탐색
+    for i in range(4):
+        nx = x + dx[i]
+        # print(nx)
+        if nx <0 or nx>=25 or (i==2 and nx%5 == 4) or (i==3 and nx%5==0): # 상하좌우 값 X
+            continue
+        if not visited[nx] and nx in arr:
+            if dfs(arr,nx,visited):
+                return True
+    return False
     
+# main 함수
+for ilist in idxList:
+    if dfs(ilist,ilist[0],visited[:]):
+        resList.append(ilist)
+        case += 1
+    count = 0
+
+print(case)
+
+
 # for i in range(5):
 #     for j in range(5):
 #         visited[i][j] = True
@@ -87,6 +82,8 @@ print(len(idxList))
 
 # print(case)
 # print(len(resList))
+
+
 
 # YYYYY
 # SYSYS
@@ -99,6 +96,30 @@ print(len(idxList))
 # YYSYY
 # YYYYY
 # YYSYY       # 1
+
+# YYYYY
+# SYSYS
+# YYYYY
+# YSYYS
+# YYYYS 
+
+# YYYYY
+# YYYYS
+# YYYYS
+# YYYYS
+# YYYYS
+
+# YYYYY
+# SYSYS
+# YSYYY
+# YYYYS
+# YYYYY 
+
+# SSSSS
+# SSSSS
+# SSSSS
+# SSSSS
+# SSSSY
 
 # 힌트
 # .....    .....
