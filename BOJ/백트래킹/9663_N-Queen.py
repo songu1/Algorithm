@@ -8,6 +8,8 @@
 
 # 풀이 : n*n개 칸에서 n개를 뽑음 -> 일직선, 대각선으로 서로 겹치면 안됨
 
+# Python3로 통과 안됨 , Pypy3로 통과
+
 import sys
 n = int(sys.stdin.readline())
 graph = [[0]*n for _ in range(n)]
@@ -39,10 +41,8 @@ def backtracking(x,y,arr,valid):
     global case
     graph[x][y] = 1
     valid = invalid(x,y,valid)
-    # print(valid)
     if len(arr) == n:
         case += 1
-        # print(arr)
         return
     nx = x + 1
     if nx >= n: return
@@ -62,23 +62,9 @@ for j in range(n):
 
 print(case)
 
-# def backtracking2(x,y,arr):
-#     global case
-#     graph[x][y] = 1
-#     if len(arr) == n:
-#         case += 1
-#         # print(arr)
-#         return
-#     nx = x + 1
-#     if nx >= n: return
-#     for ny in range(n):
-        
 
 
-#         if valid[nx][ny] == True:
-#             valid2 = [valid[i][:] for i in range(n)]
-#             backtracking(nx, ny, arr + [(nx,ny)], valid2)
-#             graph[nx][ny] = 0 
-#     return
 
+# 5       # 10
+# 6       # 4
 # 8       # 92
