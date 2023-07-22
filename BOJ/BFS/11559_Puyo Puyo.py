@@ -56,7 +56,6 @@ while True:
         break
     # 뿌요 연쇄 및 떨어뜨리기
     result += 1
-    res.sort()
     for r in res:
         if r[0]>=1:
             for k in range(r[0],0,-1):
