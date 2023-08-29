@@ -11,33 +11,47 @@
 # k개의 줄에 단절선을 중복없이 사전순으로 출력 : "A B" 형식(A<B)
 
 import sys
+sys.setrecursionlimit(1000000)
 
 line = []
 v,e = map(int,sys.stdin.readline().split())
 graph = [[] for _ in range(v+1)]
+visited = [0]*(v+1)
 for _ in range(e):
     a,b = map(int,sys.stdin.readline().split())
     graph[a].append(b)
     graph[b].append(a)
-print(graph)
 
 # DFS 함수
-def dfs(graph,v,start,visited):
-    visited[v] = True
+def dfs(graph,v,pre):
+    global num
+    num += 1
+    visited[v] = num
+    minOrder = visited[v]
     for i in graph[v]:
+        # 바로 직전값은 제외
+        if i == pre:
+            continue
         if not visited[i]:
-            dfs(graph,v,start,visited)
-    return
+            order = dfs(graph,i,v)
+            if order > visited[v]:
+                if v>i:
+                    result.append((i,v))
+                else:
+                    result.append((v,i))
+            minOrder = min(minOrder, order)
+        else:
+            minOrder = min(minOrder, visited[i])
+    return minOrder
 
-# result = []
-# for i in range(1,v+1):
-#     visited = [False]*(v+1)
-#     dfs(graph,graph[i][0],i,visited)
-#     for j in range(1,v+1):
-#         if visited[j] == False:
-            
-#     if visited.count(False) > 1:
-#         result.append()
+num = 0
+rootChild = 0
+result = []
+dfs(graph,1,-1)
+result.sort()
+print(len(result))
+for res in result:
+    print(*res,sep=" ")
 
 
 # 7 8
