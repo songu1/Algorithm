@@ -15,12 +15,18 @@
     # 0은 1개, 1은 1개 이상
 # 출력 : 미로를 탈출하는데 드는 이동 횟수의 최솟값 (불가능하면 -1)
 
+# 1차시도 : 3차원 배열을 0,a,b,c,d,e,f키를 가진 면으로 생각 (실패)
+    # => 키를 여러개를 가질 때 틀림
+# 2차시도 : 3차원 배열을 비트연산자를 통해 모든 경우로 생각함 (성공)
+    # 000000 ~ 111111 까지 64개로 생각
+    # 순서대로 각각 비트를 f,e,d,c,b,a 로 생각
+
 import sys
 from collections import deque
 
 n,m = map(int,sys.stdin.readline().split())
 maze = []
-visited = [[[0]*7 for _ in range(m)] for _ in range(n)]     # 3차원 배열
+visited = [[[0]*64 for _ in range(m)] for _ in range(n)]     # 3차원 배열
 for i in range(n):
     maze.append(list(map(str,sys.stdin.readline().rstrip())))
     for j in range(m):
@@ -36,8 +42,6 @@ def bfs(graph,x,y):
     visited[x][y][0] = 1
     graph[x][y] = '.'
     queue.append((x,y,0))
-    print(*visited,sep="\n")
-    print(key)
     while queue:
         x,y,k = queue.popleft()     # x,y:위치 / k : key별 평면
         for i in range(4):
@@ -46,34 +50,31 @@ def bfs(graph,x,y):
             if nx < 0 or nx >= n or ny < 0 or ny >= m or graph[nx][ny] == '#':
                 continue
             # 빈칸 이동
-            if graph[nx][ny] =='.' and not visited[nx][ny][k]:
-                visited[nx][ny][k] = visited[x][y][k] + 1
-                queue.append((nx,ny,k))
-            # 문 이동
-            elif 65 <= ord(graph[nx][ny]) <= 70:
-                if key[k][ord(graph[nx][ny])-64]:
+            if not visited[nx][ny][k]:
+                if graph[nx][ny] =='.':
                     visited[nx][ny][k] = visited[x][y][k] + 1
                     queue.append((nx,ny,k))
-            # 키 이동
-            elif 97 <= ord(graph[nx][ny]) <= 102:
-                nk = ord(graph[nx][ny])-96
-                key[nk] = key[k][:]
-                key[nk][nk] = True
-                visited[nx][ny][nk] = visited[x][y][k] + 1
-                graph[nx][ny] = '.'
-                queue.append((nx,ny,nk))
-            # 출구 이동
-            elif graph[nx][ny] == '1':
-                return visited[x][y][k]     # 출발지점의 이동횟수를 1로 설정했으므로 따로 -1 안해줌
-            print(*visited,sep="\n")
-            print(key)
+                # 문 이동
+                elif 65 <= ord(graph[nx][ny]) <= 70:
+                    bit = ord(graph[nx][ny])-65
+                    if k & (1 << bit):
+                        visited[nx][ny][k] = visited[x][y][k] + 1
+                        queue.append((nx,ny,k))
+                # 키 이동
+                elif 97 <= ord(graph[nx][ny]) <= 102:
+                    bit = ord(graph[nx][ny])-97
+                    nk = k | (1 << bit)
+                    visited[nx][ny][nk] = visited[x][y][k] + 1
+                    queue.append((nx,ny,nk))
+                # 출구 이동
+                elif graph[nx][ny] == '1':
+                    return visited[x][y][k]     # 출발지점의 이동횟수를 1로 설정했으므로 따로 -1 안해줌
+                
     return -1
 
     
 # main 코드
 print(bfs(maze,pos[0],pos[1]))
-print(*visited,sep="\n")
-print(maze)
 
 # 1 7
 # f0.F..1             # 7
