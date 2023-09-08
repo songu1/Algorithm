@@ -1,4 +1,4 @@
-# 고층 빌딩
+# 고층 빌딩 - 아이디어 힌트 참고
 # 빌딩 n개가 한줄로 세워져있음
 # 모든 빌딩의 높이 1~n / 모두 높이가 다름
 # 가장 왼쪽과 가장 오른쪽에 서서 빌딩을 몇개 볼 수 있는지 봄
@@ -9,21 +9,36 @@
 # 입력 : 빌딩 개수 n(1~100), 왼쪽에서 본 빌딩 수 l, 오른쪽에서 본 빌딩 수 r
 # 출력 : 가능한 빌딩 순서의 경우의 수 % 1000000007
 
+# dp : dp[n][l][r]
+# 점화식 : dp[i][j][k] = dp[i-1][j-1][k] + dp[i-1][j][k]*(i-2) + dp[i-1][j][k-1]
+
 import sys
 
 n,l,r = map(int,sys.stdin.readline().split())
 
-case = 0
-if l == 1:
-    print(0)
-    # 0번째가 n
-    # 방향 1개만 구하기
-elif r == 1:
-    print(n)
-    # 마지막이 n
-    # 방향 1개만 구하기
+dp = [[[0]*(n+1) for _ in range(n+1)] for _ in range(n+1)]
+dp[1][1][1] = 1
+# print(*dp,sep="\n")
 
-print(case%1000000007)
+for i in range(2,n+1):
+    for j in range(1,n+1):
+        for k in range(1,n+1):
+            dp[i][j][k] = dp[i-1][j-1][k] + dp[i-1][j][k]*(i-2) + dp[i-1][j][k-1]
+
+# print(*dp,sep="\n")
+print(dp[n][l][r]%1000000007)
+
+# case = 0
+# if l == 1:
+#     print(0)
+#     # 0번째가 n
+#     # 방향 1개만 구하기
+# elif r == 1:
+#     print(n)
+#     # 마지막이 n
+#     # 방향 1개만 구하기
+
+# print(case%1000000007)
 
 # 3 2 2           # 2
 
