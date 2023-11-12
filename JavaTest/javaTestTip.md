@@ -504,6 +504,18 @@ System.out.println(str.length())
 ArrayList<Integer> list = new ArrayList<>();
 System.out.println(list.size())
 ```
+
+#### 정렬
+- Array : Arrays.sort(배열);
+- ArrayList : Collections.sort(리스트);
+```java
+int[] arr = {2,3,1,5,3};
+Arrays.sort(arr);
+
+List<Integer> list = new ArrayList<>(Arrays.asList(arr));
+Collections.sort(list);
+```
+
 #### Math 라이브러리
 ```java
 Math.max(10,2)  // 최대
