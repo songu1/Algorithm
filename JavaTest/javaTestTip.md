@@ -110,8 +110,22 @@ arr = Arrays.copyOfRange(scores2,1,3);  // 배열요소 시작점, 끝점 지정
 
 // 배열 정렬(자기 자신 배열을 정렬)
 Arrays.sort(score); // 오름차순 정렬
-Arrays.sort(score,Collections.reverseOrder())   // 내림차순 정렬
 Arrays.sort(score,0,3);     // 배열요소 0,1,2만 정렬
+Arrays.sort(score,Collections.reverseOrder())   // 내림차순 정렬(int[]타입 불가능, Integer[] 타입만 가능)
+// 2차원 배열 정렬
+Arrays.sort(score, (o1,o2) -> {
+    return o1[0]-o2[0];    // 첫번째 숫자 기준 오름차순 정렬
+});
+Arrays.sort(meeting,(o1,o2) -> {
+    if(o1[0] == o2[0]){
+        return o1[1]-o2[1];
+    }
+    return o1[0]-o2[0];
+});
+Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]));    // 첫번째 숫자 기준 오름차순
+Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]).reversed());    // 첫번째 숫자 기준 내림차순
+// 2차원 배열 내림차순 정
+Arrays.sort(score, Comparator.comparingDouble((double[] o) -> o[0]).thenComparingDouble(o -> o[1]).reversed());
 
 // 정렬 후 특정 값 찾기
 Arrays.binarySearch(score,2);
@@ -366,7 +380,7 @@ String input = br.readLine();
 int a = Integer.parseInt(br.readLine());
 
 // 공백이 있는 입력
-String inp = br.readLine().split(" ");
+String[] inp = br.readLine().split(" ");
 ```
 #### StringTokenizer
 - 공백으로 값이 구분되는 경우
