@@ -117,6 +117,12 @@ Arrays.sort(score,0,3);     // 배열요소 0,1,2만 정렬
 Arrays.sort(score, (o1,o2) -> {
     return o1[0]-o2[0];    // 첫번째 숫자 기준 오름차순 정렬
 });
+Arrays.sort(meeting,(o1,o2) -> {
+    if(o1[0] == o2[0]){
+        return o1[1]-o2[1];
+    }
+    return o1[0]-o2[0];
+});
 Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]));    // 첫번째 숫자 기준 오름차순
 Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]).reversed());    // 첫번째 숫자 기준 내림차순
 
