@@ -124,6 +124,8 @@ Arrays.sort(meeting,(o1,o2) -> {
 });
 Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]));    // 첫번째 숫자 기준 오름차순
 Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]).reversed());    // 첫번째 숫자 기준 내림차순
+// 2차원 배열 내림차순 정
+Arrays.sort(score, Comparator.comparingDouble((double[] o) -> o[0]).thenComparingDouble(o -> o[1]).reversed());
 
 // 정렬 후 특정 값 찾기
 Arrays.binarySearch(score,2);
