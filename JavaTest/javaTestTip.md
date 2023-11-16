@@ -110,9 +110,8 @@ arr = Arrays.copyOfRange(scores2,1,3);  // 배열요소 시작점, 끝점 지정
 
 // 배열 정렬(자기 자신 배열을 정렬)
 Arrays.sort(score); // 오름차순 정렬
-Arrays.sort(score,Collections.reverseOrder())   // 내림차순 정렬
 Arrays.sort(score,0,3);     // 배열요소 0,1,2만 정렬
-
+Arrays.sort(score,Collections.reverseOrder())   // 내림차순 정렬(int[]타입 불가능, Integer[] 타입만 가능)
 // 2차원 배열 정렬
 Arrays.sort(score, (o1,o2) -> {
     return o1[0]-o2[0];    // 첫번째 숫자 기준 오름차순 정렬
