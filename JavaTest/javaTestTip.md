@@ -113,6 +113,13 @@ Arrays.sort(score); // 오름차순 정렬
 Arrays.sort(score,Collections.reverseOrder())   // 내림차순 정렬
 Arrays.sort(score,0,3);     // 배열요소 0,1,2만 정렬
 
+// 2차원 배열 정렬
+Arrays.sort(score, (o1,o2) -> {
+    return o1[0]-o2[0];    // 첫번째 숫자 기준 오름차순 정렬
+});
+Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]));    // 첫번째 숫자 기준 오름차순
+Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]).reversed());    // 첫번째 숫자 기준 내림차순
+
 // 정렬 후 특정 값 찾기
 Arrays.binarySearch(score,2);
 
