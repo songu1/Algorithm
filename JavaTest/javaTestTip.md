@@ -366,7 +366,7 @@ String input = br.readLine();
 int a = Integer.parseInt(br.readLine());
 
 // 공백이 있는 입력
-String inp = br.readLine().split(" ");
+String[] inp = br.readLine().split(" ");
 ```
 #### StringTokenizer
 - 공백으로 값이 구분되는 경우
