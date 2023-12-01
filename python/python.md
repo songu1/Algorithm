@@ -40,7 +40,7 @@ print("내 이름은"+name+"에요")       #띄어쓰기 포함X
 print(" 내 나이는 "+str(age)+"살입니다")    #문자열사이에 boolean/정수형 출력시 str()사용
 print(name+"는 어른일까요? "+str(is_adult))
 
-print("내 이름은",name,"이에요)      #띄어쓰기 포함
+print("내 이름은",name,"이에요")      #띄어쓰기 포함
 print("내 나이는",age,"살입니다")    #정수형/boolean형 변수 그대로 사용가능
 print(name,"는 어른일까요?",is_adult)
 ```
@@ -79,7 +79,7 @@ print(name,"는 어른일까요?",is_adult)
 - max(a,b) : 최대값
 - min(a,b) : 최소값
 - round(a) : 반올림
-- **from math import ***
+- **from math import \***
     - floor(a) : 내림
     - ceil(a) : 올림
     - sqrt(a) : 제곱근
