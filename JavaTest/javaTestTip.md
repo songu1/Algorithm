@@ -124,7 +124,7 @@ Arrays.sort(meeting,(o1,o2) -> {
 });
 Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]));    // 첫번째 숫자 기준 오름차순
 Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]).reversed());    // 첫번째 숫자 기준 내림차순
-// 2차원 배열 내림차순 정
+// 2차원 배열 내림차순 정렬
 Arrays.sort(score, Comparator.comparingDouble((double[] o) -> o[0]).thenComparingDouble(o -> o[1]).reversed());
 
 // 정렬 후 특정 값 찾기
@@ -132,6 +132,11 @@ Arrays.binarySearch(score,2);
 
 // 배열 비교
 Arrays.equals(score, score2);
+
+// 배열의 최대값, 최소값 구하기
+int[] arr = {3,1,5,4};
+Arrays.stream(arr).max().getAsInt();
+Arrays.stream(arr).min().getAsInt();
 
 /* 2차원 배열 */
 // 생성 및 초기화
@@ -534,6 +539,9 @@ Collections.sort(list);
 ```java
 Math.max(10,2)  // 최대
 Math.min(10,2)  // 최소
+// 3개 이상의 숫자 비교
+int[] arr = {1,2,3};
+int max = Math.max(Math.max(arr[0],arr[1]),arr[2]);
 
 Math.abs(-1);     // 절대값
 
