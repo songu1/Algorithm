@@ -383,6 +383,7 @@ LinkedList num2 = new LinkedList<>();
 ### (1) 자바 입력 클래스
 #### BufferedReader
 - 정수를 입력받는 함수를 제공하지 않으므로 필요한 경우 직접 변환해야함
+- main 메서드에 throws IOException을 추가해야함
 ```java
 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 String input = br.readLine();
