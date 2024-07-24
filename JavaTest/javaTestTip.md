@@ -1,6 +1,8 @@
 # 자바 코딩테스트 문법 속성 정리
 **import java.util.*;**
 
+**import java.lang.*;**
+
 
 ## [1] 기본 문법
 > String : 한 번 만들어지면 문자를 추가하거나 삭제할 수 없는 변경 불가 타입
@@ -36,17 +38,21 @@ str.trim()      // str 앞뒤 공백 제거(문자열 사이 공백은 제거x)
 str.toLowerCase()   // 대문자를 모두 소문자로 변경
 str.toUpperCase()   // 소문자를 모두 대문자로 변경
 // 문자가 대문자인지 소문자인지 확인
-char a='a'
+char a='a';
 Character.isUpperCase(a);
 Character.isLowerCase(a);
 
 str.compareTo("abcdd")
+// 아스키 코드의 차이를 반환
 // str이 abcdd와 같으면 0
 // str이 abcdd보다 사전순으로 앞 -1
 // str이 abcdd보다 사전순으로 뒤면 1
+str.compareToIgnoreCase("abcDD");  // 대소문자 무시
 
-Interger.parseInt("300")    // 문자열을 숫자로 변환
-Interger.parseString(300)   // 숫자를 문자열로 변환
+Interger.parseInt("300");    // 문자열을 숫자로 변환
+Interger.toString(300);   // 숫자를 문자열로 변환
+Double.parseDouble("2.4");
+Double.toString(5.3);
 ```
 
 #### StringBuilder 관련 메소드
@@ -54,7 +60,7 @@ Interger.parseString(300)   // 숫자를 문자열로 변환
 StringBuilder sb = new StringBuilder();
 
 sb.append("abc")    // 문자열 추가 (abc)
-sb.append(2,"kk")   // 2위치에 kk삽입 (abc->abkkc)
+sb.insert(2,"kk")   // 2위치에 kk삽입 (abc->abkkc)
 
 sb.delete(0,2)      // 0~1 위치의 문자열 삭제 (abc -> c)
 sb.deleteCharAt(2)  // 2 위치의 문자 삭제 (abc -> ab)
