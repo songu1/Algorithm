@@ -132,11 +132,59 @@ WHERE EXISTS (SELECT * FROM DEPENDENT WHERE Ssn = Essn) -- EXISTS(부양가족) 
 - 존재X : 모두가 반환되면 출력 X , 반환되지 않은 튜플이 있으며 해당하는 값 출력 
 - 존재O : 반환된 튜플이 아예없으므로 모든 값 출력
 ```SQL
+-- 직원들이 참여하지 않는 5번 부서의 과제가 존재하지 않는
+-- 그러한 직원들의 이름을 니열하라
+SELECT E.Fname, E.Lname
+FROM EMPLOYEE E
+WHERE NOT EXISTS( 
+    (SELECT P.Pnumber
+    FROM PROJECT P
+	WHERE Dnum=5)
+	EXCEPT -- MINUS IN ORACLE
+	(SELECT W.Pno
+	FROM WORKS_ON W
+	WHERE E.Ssn=W.Essn) );
+```
+```SQL
+-- 5번 부서에서 관리하는 과제(1,2,3번중) 한 과제라도 안하면
+-- 그 직원은 질의의 결과에 포함될 수 없음
 
+-- (1)
+SELECT E.Fname, E.Lname
+FROM EMPLOYEE E
+WHERE NOT EXISTS (
+    (SELECT P.Pnumber
+	FROM PROJECT P
+	WHERE Dnum=5)
+	EXCEPT -- MINUS (ORACLE)
+	(SELECT W.Pno
+	FROM WORKS_ON W
+	WHERE E.Ssn=W.Essn));
+    
+-- (2)
+SELECT E.Fname, E.Lname
+FROM EMPLOYEE E
+WHERE NOT EXISTS (SELECT *
+                    FROM WORKS_ON B
+					WHERE (B.Pno IN (SELECT P.Pnumber -- 5번부서 과제기록
+									FROM PROJECT P
+									WHERE P.Dnum=5)
+									AND NOT EXISTS (SELECT *
+													FROM WORKS_ON C
+													WHERE C.Essn=E.ssn
+													AND C.Pno = B.Pno)));
 ```
 
 
 ## JOIN
+
+### 2-way JOIN
+```SQL
+SELECT A.컬럼명, B.컬럼명
+FROM 테이블명 A, 테이블명 B
+WHERE A.NAME = 'Research'
+AND A.ID = B.ID;
+```
 
 ### JOIN
 ```SQL
