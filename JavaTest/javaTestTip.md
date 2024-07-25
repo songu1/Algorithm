@@ -49,10 +49,14 @@ str.compareTo("abcdd")
 // str이 abcdd보다 사전순으로 뒤면 1
 str.compareToIgnoreCase("abcDD");  // 대소문자 무시
 
+int numStr = 300;
+double numStr2 = 5.3;
 Interger.parseInt("300");    // 문자열을 숫자로 변환
-Interger.toString(300);   // 숫자를 문자열로 변환
+numStr.toString();   // 숫자를 문자열로 변환 - 객체의 문자열 표현을 얻을때(이미 객체가 있어야함)
+String.valueOf(numStr); // 기본 자료형(int, boolean, double)을 문자열로 변환(null -> null로 변환)
 Double.parseDouble("2.4");
-Double.toString(5.3);
+numStr2.toString();
+String.valueOf(numStr2);
 ```
 
 #### StringBuilder 관련 메소드
@@ -383,7 +387,7 @@ LinkedList num2 = new LinkedList<>();
 ### (1) 자바 입력 클래스
 #### BufferedReader
 - 정수를 입력받는 함수를 제공하지 않으므로 필요한 경우 직접 변환해야함
-- main 메서드에 throws IOException을 추가해야함
+- main 메서드에 throws IOException을 추가해야함 (**import java.io.*;**)
 ```java
 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 String input = br.readLine();
