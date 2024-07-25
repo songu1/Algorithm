@@ -27,8 +27,10 @@ FROM TEST;
 
 ### (2) 날짜 유형 데이터에서 연도, 월, 일 추출
 - DATE(날짜)
+- DAY(날짜)
 - MONTH(날짜)
 - YEAR(날짜)
+- TIME(날짜)
 - HOUR(날짜)
 - MINUTE(날짜)
 - SECOND(날짜)
@@ -79,8 +81,14 @@ LIMIT 0,3;      -- 0번부터 3개 RETURN
 ### 1~N까지 번호매기기
 - SELELT @변수이름 := 대입값;
 ```SQL
+-- 8.0 이하
 SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, A.*
 FROM TABLEA A, (SELECT @ROWNUM := 0) TMP;
+-- 8.0 이상
+SET @ROWNUM := 0;
+SELECT ROW_NUMBER() OVER (ORDER BY (SELECT 1)) AS ROWNUM, S.*
+FROM students S;
+
 ```
 
 ## [4] 함수
