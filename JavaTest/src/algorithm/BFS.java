@@ -26,6 +26,21 @@ public class BFS {
         }
     }
 
+    public static void bfs2(int start){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(start);
+        visited[start] = true;
+        while(!q.isEmpty()) {
+            int x = queue.poll();
+            for(int i:graph.get(x)){
+                if(!visited[i]){
+                    queue.offer(i);
+                    visited[i] = true;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         // 생략
     }
