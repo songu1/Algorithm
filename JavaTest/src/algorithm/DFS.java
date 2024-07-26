@@ -23,6 +23,15 @@ public class DFS {
         }
     }
 
+    public static void dfs2(int x) {
+        visited[x] = true;
+        System.out.print(x+" ");
+        for(int i:graph.get(x)){
+            if(!visited[i])
+                dfs2(i);
+        }
+    }
+
     public static void main(String[] args) {
         // 생략
     }
