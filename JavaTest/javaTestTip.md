@@ -94,76 +94,70 @@ str.toString();     // 마지막에 해줘야함
 - 배열 공간 늘리기 : 따로 공간이 큰 배열을 만들고 기존 배열 내용을 복사
 ```java
 // 배열 선언 및 초기화
-int[] score = new int[5];   // int 타입의 값 5개가 저장될 빈 공간 생성
-score[0] = 10;
-score[1] = 20;
-score[2] = 30;
-score[3] = 40;
-score[4] = 50;
+int[] score = new int[5];
+for (int i=0; i< score.length; i++)
+    score[i] = i*10;
+score[3] = 7;
+Integer[] score2 = new Integer[] {1,2,3,4,5};
+int[][] score3 = {{1,3},{2,1},{3,6},{7,4}, {7,1}};
+String[][] str = {{"ab","eg"},{"ab", "GE"},{"13","fd"}};
+String[] str2 = {"banana","apple","orange"};
 
-// for문으로 배열을 순차적을 순회하여 값을 생성
-int[] number = new int[5];
-for(int i = 0; i< score.length; i++)
-    number[i] = i*10;
-
-int[] score2 = {10,20,30,40,50};
-
-// 배열 출력
-System.out.println(Arrays.toString(score))
-System.out.println(Arrays.toString(score2))
-
-// 배열 복사
-arr = Arrays.copyOf(scores2,scores2.length);    // scores2배열을 scores2.length 전체 길이 만큼 전체 복사하여 arr에 할당
-
-// 배열 분할
-arr = Arrays.copyOfRange(scores2,1,3);  // 배열요소 시작점, 끝점 지정(1,2만 복사하여 반환)
-
+/* 1차원 배열 */
+// 배열 출력 (배열 -> String 변환 후 출력)
+System.out.println(Arrays.toString(score));
+// 배열 복사 : score배열을 score.length 길이만큼 전체 복사하여 arr에 할당
+int[] arr = Arrays.copyOf(score,score.length);
+    // 배열 분할 : 배열요소 시작점, 끝점 -> 시작점, 끝점 지정(1,2만 복사하여 반환)
+arr = Arrays.copyOfRange(score,1,3);
 // 배열 정렬(자기 자신 배열을 정렬)
-Arrays.sort(score); // 오름차순 정렬
-Arrays.sort(score,0,3);     // 배열요소 0,1,2만 정렬
-Arrays.sort(score,Collections.reverseOrder())   // 내림차순 정렬(int[]타입 불가능, Integer[] 타입만 가능)
-// 2차원 배열 정렬
-Arrays.sort(score, (o1,o2) -> {
-    return o1[0]-o2[0];    // 첫번째 숫자 기준 오름차순 정렬
-});
-Arrays.sort(meeting,(o1,o2) -> {
-    if(o1[0] == o2[0]){
-        return o1[1]-o2[1];
-    }
-    return o1[0]-o2[0];
-});
-Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]));    // 첫번째 숫자 기준 오름차순
-Arrays.sort(score, Comparator.comparingInt((int[] o) -> o[0]).reversed());    // 첫번째 숫자 기준 내림차순
-// 2차원 배열 내림차순 정렬
-Arrays.sort(score, Comparator.comparingDouble((double[] o) -> o[0]).thenComparingDouble(o -> o[1]).reversed());
-
-// 정렬 후 특정 값 찾기
-Arrays.binarySearch(score,2);
-
+Arrays.sort(score);        // 전체 정렬(오름차)
+Arrays.sort(score,0,3);    // 특정 배열 요소만 정렬(0,1,2만)
+Arrays.sort(score2, Collections.reverseOrder());    // 내림차순 정렬(int[] 불가능, Integer[] 가능)
+// 특정 값 찾기(binarySearch)
+System.out.println(Arrays.binarySearch(score,7));
 // 배열 비교
-Arrays.equals(score, score2);
+Arrays.equals(score,arr);  // 타입이 같아야함
+// 배열의 최대값, 최소값 구하기 - int[], double[] 타입만 가능 Integer[],Double[]는 불가능
+Arrays.stream(score).max().getAsInt();
+Arrays.stream(score).min().getAsInt();
+// int[]와 Integer[] 변환
+Integer[] integerScore = Arrays.stream(score).boxed().toArray(Integer[]::new);
+int[] intScore = Arrays.stream(integerScore).mapToInt(Integer::intValue).toArray();
 
-// 배열의 최대값, 최소값 구하기
-int[] arr = {3,1,5,4};
-Arrays.stream(arr).max().getAsInt();
-Arrays.stream(arr).min().getAsInt();
 
 /* 2차원 배열 */
-// 생성 및 초기화
-int[][] arr = new int[4][3];
-arr[0][1] = 10;
-...
+// 2차원 배열 출력
+System.out.println(Arrays.deepToString(score3));
+// 2차원 정수 배열 정렬
+Arrays.sort(score3, (o1,o2) -> {
+    return o1[0]-o2[0];    // 첫번째 숫자 기준 오름차순 정렬
+});
+Arrays.sort(score3, (o1,o2) -> o1[0]-o2[0]);
 
-int[][] arr2 = {
-    {10,20,30},
-    {10,20,30},
-    {10,20,30},
-    {10,20,30}
-}
-//출력
-System.out.println(Arrays.deepToString(arr2));
-// 비교
-Arrays.deepEquals(arr,arr2);
+Arrays.sort(score3, (o1,o2) -> {
+    if (o1[0] == o2[0]) {   // 첫번째 숫자가 같으면 두번째 숫자 기준 오름차순 정렬
+    return o1[1]-o2[1];
+    }
+    return o1[0]-o2[0];  // 첫번째 숫자 기준 오름차순 정렬
+});
+Arrays.sort(score3, (o1,o2) -> o1[0]==o2[0] ? o2[1]-o1[1] : o1[0]-o2[0]);
+
+//2차원 문자열 배열 정렬
+Arrays.sort(str, (o1,o2) -> {  // 1번째 문자열로 오름차순 정렬
+    return o1[0].compareTo(o2[0]);
+});
+Arrays.sort(str, (o1,o2) -> o1[1].compareTo(o2[1]));  // 2번째 문자열로 오름차순 정렬
+Arrays.sort(str, (o1,o2) -> {  // 1번째 내림차순, 2번째 내림차순
+    if(o1[0].equals(o2[0])){
+        return o2[1].compareTo(o1[1]);
+    }
+    return o2[0].compareTo(o1[0]);
+});
+Arrays.sort(str, (o1,o2) -> o1[0].equals(o2[0]) ? o1[1].compareTo(o2[1]) : o1[0].compareTo(o2[0]));  // 첫번째 오름차순(같으면 두번째 오름차순)
+
+// 2차원 배열 비교
+Arrays.deepEquals(score3,str);
 ```
 
 ### (3) List 관련 메소드
