@@ -267,6 +267,35 @@ Collections.binarySearch(list,44)
 // 없으면 44보다 큰 최초의 위치 2를 찾아 -1을 곱하고 1을 빼서 반환 (-3)
 ```
 
+### 2차원 배열(섞기)
+#### 배열+배열
+```java
+int n=5;
+int[][] graph = new int[n+1][n+1];
+```
+#### 배열 + arraylist
+- 행 수 고정, 열 수 가변
+```java
+ArrayList<Integer>[] list = new ArrayList[n + 1];
+
+for (int i = 0; i <= n; i++) {
+	list[i] = new ArrayList<>();
+}
+		
+for(int[] edge : edges) {
+	list[edge[0]].add(edge[1]);
+	list[edge[1]].add(edge[0]);
+}
+```
+#### arraylist + arraylist
+```java
+ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+for (int i = 0; i <= n; i++) {
+	graph.add(new ArrayList<>());
+}
+graph.get(n1).add(n2);
+```
+
 ### (5) Stack
 - new Stack<>() 으로 선언
 - push, pop, size, contains, peek
