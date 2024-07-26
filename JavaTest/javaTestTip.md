@@ -10,6 +10,10 @@
 > StringBuilder : 변경 가능한 타입
 ### (1) String 관련 메소드
 - 길이 고정
+- length()
+- charAt, indexOf, substring
+- replace, equals, contains, compareTo
+- String의 특정 문자를 바꾸려면 StringBuilder를 사용해야함
 ```java
 String str = "abcde";
 
@@ -60,6 +64,8 @@ String.valueOf(numStr2);
 ```
 
 #### StringBuilder 관련 메소드
+- append, insert ,delete(deleteCharAt)
+- setCharAt, reverse
 ```java
 StringBuilder sb = new StringBuilder();
 
@@ -79,6 +85,7 @@ sb.setLength(4)     // 문자열 길이를 4로 늘림(뒤에 공백 추가)
 
 #### StringBuffer 클래스
 - String은 공간, 시간 낭비가 큼 => StringBuffer 사용
+- insert, delete(deleteCharAt)
 ```java
 StringBuffer str = new StringBuffer("Java Oracle");
 System.out.println("원본 문자열:" + str);
@@ -92,6 +99,9 @@ str.toString();     // 마지막에 해줘야함
 - 배열 크기가 한정되어있음 => 크기는 불변
 - 미리 공간의 갯수(길이)를 정해야함
 - 배열 공간 늘리기 : 따로 공간이 큰 배열을 만들고 기존 배열 내용을 복사
+- length
+- copyOf(copyOfRange), sort, binarySearch
+- equals(deepEquals), 
 ```java
 // 배열 선언 및 초기화
 int[] score = new int[5];
@@ -165,7 +175,8 @@ Arrays.deepEquals(score3,str);
     - Array : 배열의 크기가 한정되어있음
     - List : 크기가 정해져있지 않고 동적으로 변함
         - ArrayList, Vector, LinkedList 등 List 인터페이스를 구현한 자료형이 존재
-- add, get, size, contains, remove
+- add, set, get, indexOf, lastIndexOf, remove(removeAll), retainAll
+- size, contains(containsAll)
 - ArrayList로 사용
 ```java
 // 선언
@@ -229,10 +240,13 @@ for (int i = 0; i<list.length() ;i++){
 ```
 
 ### (4) Collections 관련 메소드
+- Integer, Double, ... 타입만 가능(참조타입 불가능)
+- max, min, sort(reverseOrder), reverse
+- frequency(개수), binarySearch(특정 값의 인덱스 찾기)
 ```java
 import java.util.*;
 
-int[] arr = {1123,1413,23,44,512132}
+Integer[] arr = {1123,1413,23,44,512132}
 List<Integer> list = new ArrayList<>(Arrays.asList(arr))
 
 Collections.max(list)   // list 원소 중 가장 큰 값 반환
@@ -253,6 +267,9 @@ Collections.binarySearch(list,44)
 ```
 
 ### (5) Stack
+- new Stack<>() 으로 선언
+- push, pop, size, contains, peek
+- clear, empty
 ```java
 Stack<Integer> stack = new Stack<>();
 
@@ -266,8 +283,10 @@ stack.peek()        // stack top출력, 비어있으면 null 반환
 ```
 
 ### (5) Queue
-- offer : 삽입
+- new LinkedList<>() 으로 선언
+- offer, add : 삽입
 - poll : 꺼냄
+    - remove : 제거
 - peek : 보기만
 - size, isEmpty
 ```java
@@ -282,12 +301,17 @@ queue.peek()    // 첫번째 값 출력(제거X)
 ```
 
 ### Dequeue
+- new ArrayDeque<>() 로 선언
 - queue랑 동일 + pollFirst, pollLast, get
+- offer, add, poll, peek, size, isEmpty
+- pollFirst, pollLast
 ```java
 Deque<E> dp = new ArrayDeque<E>();
 ```
 
 ### (6) PriorityQueue
+- new PriorityQueue<>() 로 선언
+- add, offer, poll, peek, remove, clear (queue와 같음)
 ```java
 PriorityQueue<Integer> pq = new PriorityQueue<>();
 
@@ -581,4 +605,8 @@ String str = Integer.toString(n);
 String str2 = Integer.toString(res3,2);
 // char[] -> String 변환
 String str3 = String.valueOf(char[] name);
+// Integer -> int
+Integer integerVal = 10;
+int intVal = integerVal.intValue();
+integerVal = Integer.parseInt(intVal);
 ```
