@@ -240,6 +240,7 @@ for (int i = 0; i<list.length() ;i++){
 ```
 
 ### (4) Collections 관련 메소드
+- List와 관련
 - Integer, Double, ... 타입만 가능(참조타입 불가능)
 - max, min, sort(reverseOrder), reverse
 - frequency(개수), binarySearch(특정 값의 인덱스 찾기)
@@ -446,7 +447,7 @@ bw.close(); // 버퍼에 남아있는 데이터를 비운 후, 해당 데이터�
 
 ## [3] 팁
 ### (1) 팁
-#### 1) 특정 배열에 값을 넣을 때 중복 없이 넣기
+#### 1) 특정 리스트에 값을 넣을 때 중복 없이 넣기
 - indexOf는 특정 value가 없으면 -1을 return
 ```java
 // ArrayList를 선언하고 특정 값이 value일 때
@@ -470,6 +471,7 @@ while(value != 0){
 ```
 
 #### 3) 배열 특정 값의 index 리턴 받기
+- 배열은 index를 찾는 메소드가 따로 없음
 1. Arrays.sort() 메소드로 정렬
 2. Arrays.binarySearch() 메소드로 항목의 인덱스값 찾기
 ```java
@@ -564,6 +566,15 @@ List<Integer> list = new ArrayList<>(Arrays.asList(arr));
 Collections.sort(list);
 ```
 
+#### stack, queue
+```java
+// stack, queue
+Stack<Integer> stack = new Stack<>();
+Queue<Integer> queue = new LinkedList<>();
+Deque<Integer> dq = new ArrayDeque<>();
+PriorityQueue<Integer> pq = new PriorityQueue<>();
+```
+
 #### Math 라이브러리
 ```java
 Math.max(10,2)  // 최대
@@ -608,5 +619,122 @@ String str3 = String.valueOf(char[] name);
 // Integer -> int
 Integer integerVal = 10;
 int intVal = integerVal.intValue();
-integerVal = Integer.parseInt(intVal);
+integerVal = Integer.valueOf(intVal);
+```
+
+### 변환
+```java
+/* String - StringBuilder */
+// String을 StringBuilder로 변환    
+String str = "Hello, world!";
+StringBuilder sb = new StringBuilder(str);
+// StringBuilder를 String으로 변환
+sb = new StringBuilder("Hello, Java!");
+str = sb.toString();
+
+/* String - StringBuffer */
+// String을 StringBuffer로 변환
+str = "Hello, Java Language!";
+StringBuffer sbf = new StringBuffer(str);
+// StringBuffer를 String으로 변환 
+sbf = new StringBuffer("Hello, Java!");
+str = sbf.toString();
+
+/* String - Array */
+// string -> array(char, string)
+String str5 = "hello";
+char[] charArray = str5.toCharArray();
+String str6 = "apple,banana,cherry";
+String[] strArray = str6.split(",");
+// array(string) -> string
+str6 = String.join(",",strArray);
+```
+```java
+/* 1차원 */
+// 문자열 배열 -> list
+String[] temp = {"apple","banana","grape"};
+List<String> list = new ArrayList<>(Arrays.asList(temp));
+
+// list -> 문자열 배열
+List<String> list = new ArrayList<>();
+String[] temp = list.toArray(new String[list.size()]);
+
+// 정수배열 -> list
+Integer[] temp = {1123, 1412, 23, 44, 512132};
+List<Integer> list = new ArrayList<>(Arrays.asList(temp));
+
+// list -> 정수 배열
+List<Interger> list = new ArrayList<>();
+Integer[] temp = list.stream().mapToInt(i->i).toArray();
+
+
+/* for문 사용하여 list -> 배열 */
+// 배열크기는 list.length크기와 같게 선언되어있어야함
+for (int i = 0; i<list.length() ;i++){
+    arr[i] = list.get(i);
+    arr2[i] = list2.get(i).intValue();
+}
+
+/* 2차원 */
+int[][] array = {{1, 2, 3},{4, 5, 6},{7, 8, 9}};
+// int[][] -> 2차원 list
+List<List<Integer>> list = new ArrayList<>();
+for (int[] row : array) {
+    List<Integer> rowList = new ArrayList<>();
+    for (int value : row) {
+        rowList.add(value);
+    }
+    list.add(rowList);
+}
+// String[][] -> 2차원 리스트
+List<List<String>> list = new ArrayList<>();
+for(String[] row : array) {
+    List<String> rowList = new ArrayList<>();
+    for (String value : row) {
+        rowList.add(value);
+    }
+    list.add(rowList);
+}
+// 2차원 Integer list -> int[][]
+List<List<Integer>> list = Arrays.asList(
+    Arrays.asList(1, 2, 3),
+    Arrays.asList(4, 5, 6),
+    Arrays.asList(7, 8, 9)
+);
+int[][] array = new int[list.size()][];
+for (int i=0; i< list.size(); i++){
+    List<Integer> rowList = list.get(i);
+    array[i] = rowList.stream.mapToInt(Integer::intValue).toArray();
+}
+// 2차원 String list -> String[][]
+List<List<String>> list = Arrays.asList(
+            Arrays.asList("a", "b", "c"),
+            Arrays.asList("d", "e", "f"),
+            Arrays.asList("g", "h", "i")
+        );
+
+        String[][] array = new String[list.size()][];
+        for (int i = 0; i < list.size(); i++) {
+            List<String> rowList = list.get(i);
+            array[i] = rowList.toArray(new String[0]);
+        }
+```
+```java
+/* char - int */
+char c = '5';
+int res1 = c - '0';
+
+/* char[] - String */
+String myName = "Jade";
+char[] name=myName.toCharArray(); 
+String str1 = String.valueOf(name);
+
+/* String - int (n진수) */
+int res2 = Integer.parseInt("123",8);
+String str2 = Integer.toString(res2,8);
+
+/* Integer - int */
+Integer integerVal =10;
+int intVal = integerVal.intValue();
+integerVal = Integer.valueOf(intVal);
 ```
