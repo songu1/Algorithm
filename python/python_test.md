@@ -90,6 +90,7 @@ print(M)
 a, b =map(int,sys.stdin.readline().split())
 data=list(map(int,sys.stdin.readline().split())) # 각 데이터를 공백을 기준으로 나누어 리스트에 입력
 data=list(map(int,sys.stdin.readline().rstrip())) #각 테이터를 하나하나씩 리스트에 입력
+data = list(map(lambda x: x - 1, map(int, sys.stdin.readline().split())))   # 각 데이터를 공백을 기준으로 입력받아 각 값을 -1하여 리스트에 입력
 
 from sys import stdin, stdout
 input=stdin.readline
