@@ -53,6 +53,54 @@ for _ in range(t):
 print(*result,sep='\n')
 
 
+# 또 다른 풀이 방법
+# import sys
+# from collections import deque
+
+# global mm,nn
+# def solution(m,n,k,lettuce):
+#     global mm,nn
+#     mm,nn = m,n
+#     answer = 0
+#     graph = [[0]*m for _ in range(n)]
+#     for (lx,ly) in lettuce:
+#         graph[ly][lx] = 1
+#     for (lx,ly) in lettuce:
+#         if graph[ly][lx] == 1:
+#             bfs(graph,ly,lx)
+#             answer += 1
+#     return answer
+
+# dx = [-1,1,0,0]
+# dy = [0,0,-1,1]
+# def bfs(graph,y,x):
+#     global mm,nn
+#     queue = deque([])
+#     queue.append((y,x))
+#     graph[y][x] = 0
+#     while queue:
+#         y,x = queue.popleft()
+#         for i in range(4):
+#             ny = y + dy[i]
+#             nx = x + dx[i]
+#             if ny<0 or ny>=nn or nx<0 or nx>=mm:
+#                 continue
+#             if graph[ny][nx]==1:
+#                 graph[ny][nx]=0
+#                 queue.append((ny,nx))
+
+
+
+# # 입력 받기
+# t = int(sys.stdin.readline())
+# for _ in range(t):
+#     m,n,k = map(int,sys.stdin.readline().split())
+#     lettuce = []
+#     for _ in range(k):
+#         lettuce.append(list(map(int,sys.stdin.readline().split())))
+#     print(solution(m,n,k,lettuce))
+
+
 # 2
 # 10 8 17
 # 0 0
