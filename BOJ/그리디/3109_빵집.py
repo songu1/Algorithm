@@ -20,7 +20,6 @@ for i in range(r):
     graph.append(list(map(str,sys.stdin.readline().rstrip())))
 
 dx=[-1,0,1]
-dy=[1,1,1]
 # dfs 함수
 def dfs(graph,x,y):
     # 도착지에 도달
@@ -30,7 +29,7 @@ def dfs(graph,x,y):
     graph[x][y] = 'x'
     for i in range(3):
         nx = x + dx[i]
-        ny = y + dy[i]
+        ny = y + 1
         if nx < 0 or nx >= r or ny >= c:
             continue
         if graph[nx][ny] == '.':
