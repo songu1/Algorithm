@@ -22,15 +22,16 @@ def bfs(graph,d):
     queue=deque([])
     # 임의로 인덱스 0 처리(실제 사용X)
     # d[0]=-1 
-    queue.append((0,1))
+    queue.append((0,1))    # 현재 위치, 점프할 수 있는 위치
     while queue:
         x,y=queue.popleft()
         if d[y] == -1:   # 방문하지 않았다면
+            # 점프할 수 있는 위치로 점프
             d[y]=d[x]+1 # 점프 횟수 계산
-            # 점프할 수 있는 위치
+            # 점프한 위치에서 점프할 수 있는 위치
             for i in range(1,graph[y]+1):
                 if y+i <= n:
-                    queue.append((y,y+i))
+                    queue.append((y,y+i))    # 점프한 위치, 점프한 위치에서 점프할 수 있는 위치
     return d[n]
 
 # main함수
