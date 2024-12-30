@@ -26,7 +26,7 @@ from collections import deque
 
 n,m = map(int,sys.stdin.readline().split())
 maze = []
-visited = [[[0]*64 for _ in range(m)] for _ in range(n)]     # 3차원 배열
+visited = [[[0]*64 for _ in range(m)] for _ in range(n)]     # 3차원 배열(조건별 이동횟수를 구함)
 for i in range(n):
     maze.append(list(map(str,sys.stdin.readline().rstrip())))
     for j in range(m):
