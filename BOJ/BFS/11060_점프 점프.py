@@ -9,6 +9,8 @@
 # Ai값이 주어짐 (0~100)
 # 출력 : 재환이가 최소 몇 번 점프를 해야 가장 오른쪽 끝칸으로 갈 수 있는지 (없다면 -1)
 
+# BFS를 사용하는 이유 : 점프횟수를 효율적으로 구하기위해서 (점프횟수 순서대로 QUEUE에서 꺼냄)
+
 import sys
 from collections import deque
 n=int(sys.stdin.readline())
