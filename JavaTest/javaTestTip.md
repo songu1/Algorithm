@@ -358,6 +358,13 @@ pq.poll()       // 첫번째 값 반환, 비어있으면 null 반환
 pq.remove()     // 첫 번째 값 제거
 pq.clear()      // 값 모두 삭제
 pq.peek()       // 첫 번째 값 출력
+
+// 2차원배열
+PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);  // 첫 번째 값을 기준으로 오름차순 정렬
+for (int i = 0; i < 3; i++) {
+    int[] time = new int[2] {1,2};  // 새로운 배열 생성
+    pq.offer(time);  // 새로 생성된 배열을 pq에 추가
+}
 ```
 
 ### (7) HashSet
