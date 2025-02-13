@@ -273,7 +273,7 @@ Collections.binarySearch(list,44)
 int n=5;
 int[][] graph = new int[n+1][n+1];
 ```
-#### 배열 + arraylist
+#### 배열 + arraylist (배열 안 arraylist)
 - 행 수 고정, 열 수 가변
 ```java
 ArrayList<Integer>[] list = new ArrayList[n + 1];
@@ -286,6 +286,13 @@ for(int[] edge : edges) {
 	list[edge[0]].add(edge[1]);
 	list[edge[1]].add(edge[0]);
 }
+```
+#### arraylist + 배열
+```java
+ArrayList<int[]> list = new ArrayList<>();
+
+list.add(new int[]{1,2,3});
+list.add(new int[]{4,5,6});
 ```
 #### arraylist + arraylist
 ```java
