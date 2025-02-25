@@ -781,3 +781,51 @@ Integer integerVal =10;
 int intVal = integerVal.intValue();
 integerVal = Integer.valueOf(intVal);
 ```
+
+# 비트마스킹
+### 비트연산자
+- &(AND), |(OR), ^(XOR), ~(NOT)
+- <<(정수 a를 왼쪽으로 b비트만큼 이동, 빈자리 0으로), >>(정수 a를 오른쪽으로 b비트만큼 이동, 빈자리 msb로), >>>(정수 a를 오른쪽으로 b비트만큼 이동, 빈자리 0으로)
+### 비트마스크
+A를 10개의 집합의 상태를 나타내는 변수라고 가정
+- 공집합 : A=0
+- 꽉 찬 집합 : A=(1<<10)-1
+- 원소 추가 : A |= (1<<k)
+  - k번 원소를 집합 A에 추가 : (1) <<으로 k번 비트만 1로 만듦 (2) A와 Or 현산으로 원소 추가
+- 원소 삭제 : A &= ~(1<<k)
+  - k번 원소를 집합 A에서 삭제 : (1) <<으로 k번 비트만 1로 만든 후 NOT하여 k번 비트만 0으로 만듦 (2) A와 AND 연산하여 원소 삭제
+- 원소 토글 : A ^= (1<<k)
+  - k번 원소가 집합 A에 있으면 삭제, 없으면 추가 : (1) <<으로 k번 비트만 1로 만듦 (2) XOR 연산으로 1이 있으면 0으로, 0이 있으면 1로 바꿈
+- 원소의 포함 여부 확인 : if (A & (1<<k))
+  - k번 원소가 집합 A에 있는지 확인 : (1) <<으로 k번 비트만 1로 만듦 (2) AND 연산
+- 집합 연산
+  - A|B, A&B, A&~B, A^B
+```java
+public class BitmaskExample {
+    public static void main(String[] args) {
+        int A = 0b0000000000;
+        int k = 3;
+        int MASK = (1 << 10);
+
+        // 원소 추가(k번)
+        A |= (1 << k);
+        A |= (1 << (k + 2));
+        System.out.println(Integer.toBinaryString(A)); // 0000101000
+
+        // 원소 삭제(k번)
+        A &= ~(1 << k);
+        System.out.println(Integer.toBinaryString(A)); // 0000100000
+
+        // 원소 토글 (k번 원소가 있으면 삭제 없으면 추가)
+        A ^= (1 << k);
+        System.out.println(Integer.toBinaryString(A)); // 0000101000
+        A ^= (1 << k);
+        System.out.println(Integer.toBinaryString(A)); // 0000100000
+
+        // 원소의 포함 여부 확인
+        if ((A & (1 << k)) != 0) {
+            System.out.println("contain");
+        }
+    }
+}
+```
