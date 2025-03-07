@@ -168,6 +168,9 @@ Arrays.sort(str, (o1,o2) -> o1[0].equals(o2[0]) ? o1[1].compareTo(o2[1]) : o1[0]
 
 // 2차원 배열 비교
 Arrays.deepEquals(score3,str);
+
+// 배열 선언 후 다른 값으로 초기화
+Arrays.fill(arr,-1);
 ```
 
 ### (3) List 관련 메소드
