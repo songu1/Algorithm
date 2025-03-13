@@ -803,6 +803,8 @@ A를 10개의 집합의 상태를 나타내는 변수라고 가정
   - k번 원소가 집합 A에 있는지 확인 : (1) <<으로 k번 비트만 1로 만듦 (2) AND 연산
 - 집합 연산
   - A|B, A&B, A&~B, A^B
+- 비트가 켜진 개수 확인
+  - Integer.bitCount(A) : 정수 n의 비트에서 1의 개수를 반환
 ```java
 public class BitmaskExample {
     public static void main(String[] args) {
@@ -829,6 +831,9 @@ public class BitmaskExample {
         if ((A & (1 << k)) != 0) {
             System.out.println("contain");
         }
+
+	// 비트 켜진 개수 확인
+	System.out.println(Integer.bitCount(A));
     }
 }
 ```
