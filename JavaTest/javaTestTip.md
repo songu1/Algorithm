@@ -359,6 +359,7 @@ pq.add(1)       // 값 추가
 pq.offer(1)     // 값 추가
 pq.poll()       // 첫번째 값 반환, 비어있으면 null 반환
 pq.remove()     // 첫 번째 값 제거
+pq.remove(2)	// "2" 제거
 pq.clear()      // 값 모두 삭제
 pq.peek()       // 첫 번째 값 출력
 
