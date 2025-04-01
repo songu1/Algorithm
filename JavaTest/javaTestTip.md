@@ -362,6 +362,9 @@ pq.remove()     // 첫 번째 값 제거
 pq.clear()      // 값 모두 삭제
 pq.peek()       // 첫 번째 값 출력
 
+// 역방향
+PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+
 // 2차원배열
 PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);  // 첫 번째 값을 기준으로 오름차순 정렬
 for (int i = 0; i < 3; i++) {
