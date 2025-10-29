@@ -434,7 +434,7 @@ for(Integer i:map.keySet()) {
     System.out.println(i+map.get(i));   // 1 사과
 }
 
-
+import java.util.Map.Entry;		// import 해야 Entry를 사용 가능 (import하지 않으면 Map.Entry로 수행해야함)
 for (Entry<Integer, String> entry: map.entrySet())
     System.out.println(entry.getKey() + entry.getValue());  // 1 사과
 
@@ -445,6 +445,8 @@ map2.getOrDefault("바나나",0);	// 0
 
 for (Entry<String,Integer> entry : map2.entrySet())
 	System.out.println(entry.getKey());
+
+	
 ```
 
 ### (9) LinkedList
