@@ -430,12 +430,21 @@ for (type var:iterate){
     }
 
 /* 값 출력 */
-for(Integer i:map.keySet())
+for(Integer i:map.keySet()) {
     System.out.println(i+map.get(i));   // 1 사과
+}
 
 
 for (Entry<Integer, String> entry: map.entrySet())
     System.out.println(entry.getKey() + entry.getValue());  // 1 사과
+
+HashMap<String,Integer> map2 = new HashMap<>();
+map2.put("사과",1);
+map2.getOrDefault("사과",0);	// 1
+map2.getOrDefault("바나나",0);	// 0
+
+for (Entry<String,Integer> entry : map2.entrySet())
+	System.out.println(entry.getKey());
 ```
 
 ### (9) LinkedList
