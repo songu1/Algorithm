@@ -448,6 +448,25 @@ for (Entry<String,Integer> entry : map2.entrySet())
 
 	
 ```
+#### HashMap + PriorityQueue
+```
+HashMap<String, PriorityQueue<int[]>> maxMap = new HashMap<>();
+
+// Comparator를 하나 만들어두기
+Comparator<int[]> customComparator = (a, b) -> {
+    if (a[0] != b[0]) return b[0] - a[0]; // 첫 번째: 내림차순
+    return a[1] - b[1];                    // 두 번째: 오름차순
+};
+
+// 새로운 key 추가 시마다 PriorityQueue 생성
+maxMap.put("data1", new PriorityQueue<>(customComparator));
+maxMap.put("data2", new PriorityQueue<>(customComparator));
+maxMap.put("data3", new PriorityQueue<>(customComparator));
+
+// 값 추가
+maxMap.get("data1").offer(new int[]{5, 2});
+maxMap.get("data2").offer(new int[]{3, 10});
+```
 
 ### (9) LinkedList
 ```java
