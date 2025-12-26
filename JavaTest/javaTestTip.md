@@ -635,6 +635,15 @@ ArrayList<Integer> list = new ArrayList<>();
 System.out.println(list.size())
 ```
 
+#### int 자리수 분리
+```java
+int n=10503;
+int[] digits = String.valueOf(n)
+			.chars()
+			.map(c -> c-'0')
+			.toArray();
+```
+
 #### 정렬
 - Array : Arrays.sort(배열);
 - ArrayList : Collections.sort(리스트);
