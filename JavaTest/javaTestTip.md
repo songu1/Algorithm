@@ -655,6 +655,19 @@ List<Integer> list = new ArrayList<>(Arrays.asList(arr));
 Collections.sort(list);
 ```
 
+#### 특정 조건으로 정렬하기
+- Comparator 사용하기
+```java
+// 문자열 배열을 이어붙였을때 가장 큰수(가장 큰 문자열)이 되도록 정
+Arrays.sort(str, new Comparator<String>() {
+	@Override
+	public int compare(String o1, String o2) {
+		return (o2+o1).compareTo(o1+o2)
+	}
+});
+```
+
+
 #### stack, queue
 ```java
 // stack, queue
