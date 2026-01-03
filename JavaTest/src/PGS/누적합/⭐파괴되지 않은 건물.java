@@ -1,3 +1,4 @@
+// https://school.programmers.co.kr/learn/courses/30/lessons/92344
 // n*m(최대 1000*1000) 맵의 내구도를 가진 건물을 적이 공격하여 파괴
 // 적 : 공격 -> 내구도 감소, 내구도<=0이면 파괴
 // 아군 : 회복 스킬 -> 내구도 증가
