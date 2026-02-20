@@ -18,7 +18,7 @@ FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
 GROUP BY CAR_ID
 ORDER BY CAR_ID DESC;
 
--- 문자열 max ***
+-- 문자열 max *** : history 테이블이므로 car_id 중복 가능 => 대여중, 대여 가능이 모두 있을때는 대여중으로 해야함
 -- max : 대여중이 대여 가능보다 크게 나옴
 
 -- mysql
