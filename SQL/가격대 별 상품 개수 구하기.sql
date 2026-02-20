@@ -1,0 +1,9 @@
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131530
+
+-- PRODUCT_CODE의 앞2자리 :카테고리 코드
+-- 만원단위의 PRICE대별로 COUNT(*)를 출력
+-- PRICE_GROUP, PRIDUCTS 컬럼명, PRICE_GROUP 오름차순
+SELECT FLOOR(PRICE/10000)*10000 AS PRICE_GROUP, COUNT(*) AS PRODUCTS
+FROM PRODUCT
+GROUP BY FLOOR(PRICE/10000)*10000
+ORDER BY PRICE_GROUP;
