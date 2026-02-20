@@ -1,3 +1,5 @@
+-- https://school.programmers.co.kr/learn/courses/30/lessons/157340
+
 -- 자동차 대여기록에서 대여중/대여가능 여부 구분하기
 -- 프로그래머스 lv3
 
