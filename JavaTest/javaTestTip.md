@@ -29,13 +29,13 @@ str.substring(3)    // 3부터 끝까지의 문자열 "de" 반환
 
 str.replace('b','k')    // b를 k로 변경(akcde)
 str.replaceAll(".","/") // 모든 문자(".")를 "/"로 변경
-str.replaceFirst('p','e');  // 여러 문자중 첫번째만 치환(aeple)
+str.replaceFirst("p","e");  // 여러 문자중 첫번째만 치환(aeple) - char가 아니라 String 인자
 
 str.equals("abcde")     // str과 비교해서 같으면 true, 다르면 false
 str.contains("bc")      // str에 bc가 포함되면 true, 아니면 false
 
 str.split(" ")  // 띄어쓰기로 구분된 문자열 str을 분리해서 String[]배열로
-str.split()     // 띄어쓰기 없는 문자열 str을 한 문자씩 분리하여 String[] 배열로
+str.split("")     // 띄어쓰기 없는 문자열 str을 한 문자씩 분리하여 String[] 배열로
 
 str.trim()      // str 앞뒤 공백 제거(문자열 사이 공백은 제거x)
 
@@ -56,10 +56,12 @@ str.compareToIgnoreCase("abcDD");  // 대소문자 무시
 int numStr = 300;
 double numStr2 = 5.3;
 Interger.parseInt("300");    // 문자열을 숫자로 변환
-numStr.toString();   // 숫자를 문자열로 변환 - 객체의 문자열 표현을 얻을때(이미 객체가 있어야함)
+// numStr.toString(); 는 불가능 - int(primitive)에는 .toStrig() 호출 불가 => 컴파일 에러
+Integer.toString() 형식만 가능
 String.valueOf(numStr); // 기본 자료형(int, boolean, double)을 문자열로 변환(null -> null로 변환)
 Double.parseDouble("2.4");
-numStr2.toString();
+// numStr2.toString();  는 불가능 - double(primitive)에는 .toStrig() 호출 불가 => 컴파일 에러
+Double.toString() 형식만 가능
 String.valueOf(numStr2);
 ```
 
@@ -170,7 +172,14 @@ Arrays.sort(str, (o1,o2) -> o1[0].equals(o2[0]) ? o1[1].compareTo(o2[1]) : o1[0]
 Arrays.deepEquals(score3,str);
 
 // 배열 선언 후 다른 값으로 초기화
-Arrays.fill(arr,-1);
+Arrays.fill(arr,-1);		// Arrays.fill은 1차원 배열만 가능 2차원 배열은 각 행마다 반복해야함
+
+// PriorityQueue 배열 초기화
+PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+for (int i = 0; i < 3; i++) {
+    int[] time = new int[]{1, 2};
+    pq.offer(time);
+}
 ```
 
 ### (3) List 관련 메소드
@@ -192,7 +201,7 @@ List<String> list2 = Arrays.asList("apple","banana","grape");                   
 list.add("서울")    // list의 가장 뒤에 서울 삽입
 list.add(1,"대전")  // 1위치에 대전 삽입
 list.addAll(list2)  // list의 뒤에 list2의 모든 값을 삽입
-// 빈리스트에 addAll하면 깊은 복사
+// 빈리스트에 addAll하면 깊은 복사. ArrayList<int[]> 처럼 배열이 든 리스트를 addAll하면 얉은 복사(참조 복사)
 
 list.get(0)     // 0 위치의 값 반환(서울)
 list.set(0,"대구")  // 0위치의 값을 대구로 변경
@@ -213,6 +222,7 @@ list.contains("서울")       // 서울이 list에 있으면 true, 없으면 fal
 list.containsAll(list2)     // list에 list2의 모든 값이 포함되어있으면 true
 
 list.removeIf(k -> k%2 != 0)    // 람다식으로 홀수를 list에서 모두 제거
+
 ```
 
 #### 📚 배열 <-> 리스트 
@@ -225,14 +235,26 @@ List<String> list = new ArrayList<>(Arrays.asList(temp));
 List<String> list = new ArrayList<>();
 String[] temp = list.toArray(new String[list.size()]);
 
-// 정수배열 -> list
-int[] temp = {1123, 1412, 23, 44, 512132};
+// Integer 배열 -> list
+Integer[] temp = {1123, 1412, 23, 44, 512132};
 List<Integer> list = new ArrayList<>(Arrays.asList(temp));
 
-// list -> 정수 배열
-List<Interger> list = new ArrayList<>();
-int[] temp = list.stream().mapToInt(i->i).toArray();
+// list -> Integer 배열
+List<Integer> integerList = new ArrayList<>(Arrays.asList(1,2,3));
+Integer[] integerArr1 = integerList.toArray(new Integer[0]);		// 인자가 있어야 함. 인자없이는 Object[]를 반환해서 Integer[]로 캐스팅이 안됨
+Integer[] integerArr2 = integerList.stream().toArray(Integer[]::new);
 
+// int 배열 -> list
+int[] intArr = {1,2,3};
+List<Integer> intList1 = Arrays.stream(intArr).boxed().collect(Collectors.toList());		// 방법1
+List<Integer intList2 = new ArrayList<>();
+for(int n:arr)
+	intList2.add(n);
+
+// list -> int 배열
+List<Integer> intList = new ArrayList<>();
+int[] temp = intList.stream().mapToInt(i->i).toArray();
+// int[]는 Arrays.asList()에 넣으면 List<int[]>(원소 1개짜리 리스트)가 되어버려 List<Integer>로 받을 수 없음 → Integer[]로 선언해야 함
 
 /* for문 사용하여 list -> 배열 */
 // 배열크기는 list.length크기와 같게 선언되어있어야함
@@ -369,7 +391,7 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 // 2차원배열
 PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);  // 첫 번째 값을 기준으로 오름차순 정렬
 for (int i = 0; i < 3; i++) {
-    int[] time = new int[2] {1,2};  // 새로운 배열 생성
+    int[] time = new int[] {1,2};  // 새로운 배열 생성
     pq.offer(time);  // 새로 생성된 배열을 pq에 추가
 }
 ```
@@ -387,7 +409,7 @@ HashSet<Integer> set = new HashSet<>();
 set.add(1)      // 값 추가
 set.remove(1)   // 값이 1인 데이터 삭제
 set.removeAll(set2)     // set의 데이터 중 set2에 들어있는 데이터를 모두 삭제
-set.removeAll(set2)     // set의 데이터 중 set2에 들어있지 않은 데이터를 모두 삭제
+set.retainAll(set2)     // set의 데이터 중 set2에 들어있지 않은 데이터를 모두 삭제 (교집합만 남기는 메서드)
 set.clear()     // 모든 데이터 삭제
 set.size()      // 크기 반환
 set.contains(1)     // 값 1이 있으면 true, 없으면 false
@@ -565,33 +587,17 @@ int idx = Arrays.binarySearch(members,"bb");
 ```java
 public static HashMap<String, ArrayList<String>> joinDic(String[] arr){
     // dic이름의 hashmap을 선언
-    HashMap<String,ArrayList<String>> dic = new HashMap<String, ArrayList<String>>();
-    for(int i = 0; i < arr.length; i++){
-        // arr에 담긴 데이터를 ,를 기준으로 split하여 변수 line에 담음
-        String[] line = arr[i].split(",");
-        // line에 담긴 내용 중 6번째 내용(line[5]) 를 변수 key에 담음
-        String key = line[5];
-        //list라는 이름으로 arraylist를 선언
-        ArrayList<String> list = new ArrayList<String>();
-        // key가 dic(hashmap)에 있는지 확인
-        if (dic.containsKey(key)){  // 있다면 list에 담긴 value 가져오고 line의 12번째 내용을 추가
-            list = dic.get(key)
-            list.add(line[13])
-        }else{  // 없다면 list에 line의 12번째 내용을 추가
-            list.add(line[13]);
-        }
-        // 변수 key를 dic의 key값으로, 변수 list를 dic의 value값으로 추가
-        dic.put(key,list);
-        // 정상적으로 해시맵에 들어갔는지 확인
-        for (String key:dic.keySet()){
-            System.out.println(key);
-        }
-
-        return dic;
-
+    HashMap<String,ArrayList<String>> dic = new HashMap<>();
+	for (String s:arr) {
+		// arr에 담긴 데이터를 ,를 기준으로 split하여 변수 line에 담음
+		String[] line = s.split(",");
+		// line에 담긴 내용 중 6번째 내용(line[5]) 를 변수 key에 담음
+		String key = line[5];
+		// key가 있으면 가져오고 없으면 새로 만들어서 추가 => 그 이후 line의 12번째 내용을 추가
+		dic.computeIfAbsent(key, k -> new ArrayList<>()).add(line[13]);
     }
+	return dic;
 }
-
 ```
 
 #### 5) HashMap Value 기준으로 정렬 - Entry 내장 함수 사용
@@ -703,10 +709,12 @@ Math.sqrt(4);   // 2
 #### 자료형 변환
 ```java
 char c='5';
-String s=new String('1324');
-String s2=new String('01101');
+String s=new String("1324");
+String s2=new String("01101");
+
 int n = 3;
-char[] name='Jade Song';   // char형 배열에 각각의 문자가 그대로 저장되어있음
+char[] name="Jade Song".toCharArray();   // char형 배열에 각각의 문자가 그대로 저장되어있음
+
 // char -> int
 int res1 = c - '0';
 // String -> int
@@ -717,7 +725,7 @@ int res3 = Integer.parseInt(s2,2);
 String str = Integer.toString(n);
 String str2 = Integer.toString(res3,2);
 // char[] -> String 변환
-String str3 = String.valueOf(char[] name);
+String str3 = String.valueOf(name);
 // Integer -> int
 Integer integerVal = 10;
 int intVal = integerVal.intValue();
@@ -751,6 +759,41 @@ String[] strArray = str6.split(",");
 // array(string) -> string
 str6 = String.join(",",strArray);
 ```
+
+```java
+// int <-> integer
+int primitiveVal = 10;
+Integer boxedVal = primitiveVal;        // ✅ 오토박싱 (자동 변환, 명시 안 해도 됨)
+Integer boxedVal2 = Integer.valueOf(primitiveVal);  // 명시적으로 쓰면 이렇게
+
+int backToPrimitive = boxedVal;         // ✅ 오토언박싱 (자동 변환)
+int backToPrimitive2 = boxedVal.intValue();  // 명시적으로 쓰면 이렇게
+
+// 비교 함정
+// (1) Integer끼리 등호 비교
+// => 자바의 Integer 캐시 문제 : 자바는 -128~127범위의 integer값을 미리 만들어두고 재사용
+
+// 오토박싱될때 범위 안이면 캐시된 같은 객체를 참조
+Integer a = 100;
+Integer b = 100;
+System.out.println(a == b);   // true
+
+// 범이를 벗어나면 매번 새 객체 생성
+Integer c = 200;
+Integer d = 200;
+System.out.println(c == d);   // false !!
+
+// Integer 끼리의 비교는 무조건 equals 아니면 값비교하기
+c.equals(d)
+c.intValue() == d.intValue() 
+
+// (2) Integer, int 비교
+int x = 100;
+Integer y = 100;
+System.out.println(x == y);   // true — 이건 안전!
+// => Integer가 자동으로 언박싱되면서 값 비교(int==int)가 되므로 안전
+```
+
 ```java
 /* 1차원 */
 // 문자열 배열 -> list
@@ -767,7 +810,7 @@ List<Integer> list = new ArrayList<>(Arrays.asList(temp));
 
 // list -> 정수 배열
 List<Interger> list = new ArrayList<>();
-Integer[] temp = list.stream().mapToInt(i->i).toArray();
+int[] temp = list.stream().mapToInt(i->i).toArray();
 
 
 /* for문 사용하여 list -> 배열 */
