@@ -551,6 +551,7 @@ bw.close(); // 버퍼에 남아있는 데이터를 비운 후, 해당 데이터�
 ### (1) 팁
 #### 1) 특정 리스트에 값을 넣을 때 중복 없이 넣기
 - indexOf는 특정 value가 없으면 -1을 return
+- 아예 중복이 없는 리스트를 만들고 싶다면 리스트 말고 안전하게 집합 사용하기
 ```java
 // ArrayList를 선언하고 특정 값이 value일 때
 List<String> list = new ArrayList<>();
