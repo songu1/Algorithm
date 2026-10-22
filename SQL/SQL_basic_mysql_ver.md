@@ -2,6 +2,7 @@
 
 ## 실행 순서
 작성 순서: SELECT - DISTINCT - FROM - JOIN - ON - WHERE - GROUP BY - HAVING - ORDER BY - LIMIT - OFFSET
+
 실제 실행 순서: FROM → JOIN/ON → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → LIMIT
 - WHERE에서는 SELECT의 별칭(AS)을 못 쓰지만, ORDER BY/HAVING에서는 쓸 수 있다. (MySQL은 HAVING에서도 별칭 허용)
 
