@@ -257,8 +257,8 @@ int[] temp = intList.stream().mapToInt(i->i).toArray();
 // int[]는 Arrays.asList()에 넣으면 List<int[]>(원소 1개짜리 리스트)가 되어버려 List<Integer>로 받을 수 없음 → Integer[]로 선언해야 함
 
 /* for문 사용하여 list -> 배열 */
-// 배열크기는 list.length크기와 같게 선언되어있어야함
-for (int i = 0; i<list.length() ;i++){
+// 배열크기는 list.size크기와 같게 선언되어있어야함
+for (int i = 0; i<list.size() ;i++){
     arr[i] = list.get(i);
     arr2[i] = list2.get(i).intValue();
 }
@@ -810,7 +810,7 @@ Integer[] temp = {1123, 1412, 23, 44, 512132};
 List<Integer> list = new ArrayList<>(Arrays.asList(temp));
 
 // list -> 정수 배열
-List<Interger> list = new ArrayList<>();
+List<Integer> list = new ArrayList<>();
 int[] temp = list.stream().mapToInt(i->i).toArray();
 
 
