@@ -51,7 +51,7 @@ Queue<Integer> queue = new LinkedList<>();
 queue.offer(start);
 visited[start] = true;
 
-while (!queue.isEmpty() {
+while (!queue.isEmpty()) {
 	int cur = queue.poll();
 	for (int next : graph.get(cur)) {
 		if (!visited[next]) {
@@ -123,7 +123,7 @@ Arrays.fill(dist, Integer.MAX_VALUE);
 dist[start] = 0;
 
 // graph.get(a) = List<int[]>, int[]는 {목적지, 가중치}
-PriorityQueue<int[]> pg = new PriorityQueue<>((x,y) -> x[1] - y[1]);  // 오름차순
+PriorityQueue<int[]> pq = new PriorityQueue<>((x,y) -> x[1] - y[1]);  // 오름차순
 pq.offer(new int[] {start,0});
 
 while(!pq.isEmpty()) {
@@ -339,9 +339,9 @@ void backtracking(int depth, int sum) {
 
 ```java
 // 정렬된 배열에서 합이 target인 두 수 찾기
-int left = 0, right arr.length - 1;
+int left = 0, right = arr.length - 1;
 while (left < right) {
-		int sum = arr[left] = arr[right];
+		int sum = arr[left] + arr[right];
 		if (sum == target) {
 				// 정답처리
 				break;
